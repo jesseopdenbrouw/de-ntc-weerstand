@@ -4,11 +4,12 @@ Dit is een Readme voor de repository NTC
 
 ### What is this repository for? ###
 
-Dit document behandelt de van de NTC-weerstand
+Dit document behandelt van de NTC-weerstand:
 
 	* Opbouw,
 	* Gegevens/parameters fabrikant,
 	* Wiskundige beschrijvingen,
+	* Bepaling coefficienten/parameters,
 	* Gebruik in een schakeling
 	* Berekenen temperatuur mbv software,
 
