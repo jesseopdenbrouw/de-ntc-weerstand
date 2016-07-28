@@ -1,0 +1,272 @@
+{VERSION 6 0 "IBM INTEL NT" "6.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Output" -1 
+11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 
+0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Plot" -1 13 1 {CSTYLE "" -1 -1 "
+Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 1 0 0 0 0 1 0 1 0 2 2 0 1 }
+}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }{TEXT -1 
+0 "" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 90 "This Maple file will guide
+ you through the steps for deriving a linearized function for T." }}
+{PARA 0 "" 0 "" {TEXT -1 84 "First, the function for calculating T (in
+ Kelvin) from a given Z is presented below." }}{PARA 0 "" 0 "" {TEXT 
+-1 82 "Z is a value ranging from 0.0 to 1.0, but it should be noted th
+at 0.0 and 1.0 give" }}{PARA 0 "" 0 "" {TEXT -1 71 "an error in the na
+tural logarithm, hence there is no valid value for T." }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 30 "T:=B/(ln((1-Z)/Z)+ln(Ropt/A));" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"TG*&%\"BG\"\"\",&-%#lnG6#*&,&F'F'%
+\"ZG!\"\"F'F.F/F'-F*6#*&%%RoptGF'%\"AGF/F'F/" }}}{EXCHG {PARA 0 "" 0 "
+" {TEXT -1 80 "Next, we fill in the values for Ropt, A and B. Routines
+ for finding these values" }}{PARA 0 "" 0 "" {TEXT -1 28 "are presente
+d in other work." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "Ropt:=7
+55.39;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%RoptG$\"&Rb(!\"#" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "A:=4.4126894e-3;" }}{PARA 
+11 "" 1 "" {XPPMATH 20 "6#>%\"AG$\")%*o7W!#5" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 12 "B:=3462.232;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#
+>%\"BG$\"(KAY$!\"$" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 50 "Now give th
+e function for T with values filled in." }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 2 "T;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#,$*&$\"(KAY$!\"$
+\"\"\",&-%#lnG6#*&,&F(F(%\"ZG!\"\"F(F/F0F($\"+60007!\")F(F0F(" }}}
+{EXCHG {PARA 0 "" 0 "" {TEXT -1 87 "Now plot the function T for Z rang
+ing from 0.0 to 1.0. The 1.01 is used as a workaround" }}{PARA 0 "" 0 
+"" {TEXT -1 88 "for the plot routine. When one uses 1.00, there is a v
+ertical solid red line at Z = 1.0." }}{PARA 0 "" 0 "" {TEXT -1 93 "One
+ can see that in the range of Z = [0.3, 0.6], the values for T are cha
+nging slowly and the" }}{PARA 0 "" 0 "" {TEXT -1 29 "function looks al
+most linear." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 21 "plot(T,Z=0.
+00..1.01);" }{TEXT -1 0 "" }}{PARA 13 "" 1 "" {GLPLOT2D 292 275 275 
+{PLOTDATA 2 "6%-%'CURVESG6$7bo7$$\"\"!F)F(7$$\"3=+++!zE(zo!#@$\"3q1=LK
+A(4z\"!#:7$$\"3/+++e`%fP\"!#?$\"3)RXVWeXw&=F07$$\"3'******f.=R1#F4$\"3
+m'\\3+HH!**=F07$$\"33+++:2*=v#F4$\"3j,1p`#\\&H>F07$$\"3!******>2Oy7%F4
+$\"3G'fan,:V(>F07$$\"39+++I9y.bF4$\"3,5sq;XS2?F07$$\"3A+++X@nb#)F4$\"3
+s&Q?#)zqg0#F07$$\"3.+++'Gc25\"!#>$\"3KtVc&*)e@4#F07$$\"3'******zUM6l\"
+FS$\"3A]*)yF!\\a9#F07$$\"3(******4d7:?#FS$\"3o2TCHN;&=#F07$$\"39+++IZF
+fJFS$\"3F\"G6g^ivB#F07$$\"3B+++))o.<TFS$\"3;9^*e04!yAF07$$\"3i*****4KW
+7F'FS$\"33JD4'z!\\YBF07$$\"3e+++Q7tR%)FS$\"3g.>dBDd)R#F07$$\"3++++s6zf
+5!#=$\"3P*HiiN:6W#F07$$\"33+++H@))f7Fap$\"3?mYr.([_Z#F07$$\"3!******\\
+skqY\"Fap$\"3doc)[zLo]#F07$$\"3))*****>EL8o\"Fap$\"3dX:Bw9aODF07$$\"33
++++QY\"\\*=Fap$\"3u!*=^R-*Qc#F07$$\"3.+++N$4Y6#Fap$\"3sM\\KbB?!f#F07$$
+\"35+++Wl63BFap$\"3G\\63(fp@h#F07$$\"3;+++H)ff_#Fap$\"3/TON-'=ej#F07$$
+\"3)*******)f(pWFFap$\"39u)zhBS'eEF07$$\"3-+++s>\\bHFap$\"3y2;rS_$*zEF
+07$$\"39+++dM\"p9$Fap$\"3A\"zgl@+))p#F07$$\"3')*****z6KXP$Fap$\"3/%3%p
+xZx?FF07$$\"3%)******z\\NnNFap$\"3R+MB%=$4RFF07$$\"39+++4Ql\"z$Fap$\"3
+5xzpY(e,w#F07$$\"3)******zF'>!*RFap$\"3#4neeqk'yFF07$$\"3%******R$)G!3
+UFap$\"3[[MATy*))z#F07$$\"3*)******RpX:WFap$\"3&fF_Hto\"=GF07$$\"3&***
+***zS')=j%Fap$\"3$)p8jDjNQGF07$$\"3()*****>AO1$[Fap$\"3ey)o)HL.dGF07$$
+\"3b+++YZ,X]Fap$\"3ET;')y1SxGF07$$\"3M+++$y$pn_Fap$\"3'\\R*G'\\%)))*GF
+07$$\"3O+++Rl`haFap$\"3Se\\N(oJz\"HF07$$\"3_*****f-#*3n&Fap$\"3G56C?m%
+*QHF07$$\"3))******Gn<()eFap$\"3YX7!)e$Q7'HF07$$\"39+++;\"p()4'Fap$\"3
+E\"y%e8%GP)HF07$$\"3-+++Ic\\.jFap$\"3p!fVU#yC1IF07$$\"3S+++>&43`'Fap$
+\"3:;8k&f&GKIF07$$\"3r*****z:h]t'Fap$\"3MxtLBaxcIF07$$\"3w******zL9`pF
+ap$\"3%>9(3\"*yF%3$F07$$\"3u+++'Ge2:(Fap$\"3m.ehjci5JF07$$\"3]+++vN!oO
+(Fap$\"3Ve$=T7\"GTJF07$$\"3K+++c`3qvFap$\"3q3DwM&RA<$F07$$\"3[+++!RtDy
+(Fap$\"3bO')*>\\ls?$F07$$\"3=+++#G>.*zFap$\"3Uw&y))Q_ZC$F07$$\"3B+++y*
+4y?)Fap$\"3Wd')\\[kK)G$F07$$\"3@+++o$zsT)Fap$\"3q')G$34)oNLF07$$\"3***
+****H2#\\J')Fap$\"3=98)\\D;9R$F07$$\"3_******))4$R%))Fap$\"3AM6w21xcMF
+07$$\"3`*******GS\"R!*Fap$\"3+\\I'3=V'HNF07$$\"31+++y@(GE*Fap$\"3`&ofU
+\\!*pj$F07$$\"3))*****fk!)HY*Fap$\"3Qz67$)3#4x$F07$$\"3#*******H$f'p&*
+Fap$\"3ia$=n\"\\'*oQF07$$\"3g******4!Qjn*Fap$\"34/'*zQ3I,SF07$$\"3%***
+****>JWy(*Fap$\"3M%f,u9;**=%F07$$\"3O+++J#[0))*Fap$\"3'HY*Go)GY`%F07$$
+\"3p+++0(zz!**Fap$\"3c&3B@wKop%F07$$\"3g*****\\<6a$**Fap$\"3*)zu6^1pN
+\\F07$$\"3;+++5p7\\**Fap$\"3wAb]Bzg5^F07$$\"3s+++XE%G'**Fap$\"3iDgJh7G
+g`F07$$\"3C+++50qp**Fap$\"32\"G*)R*etNbF07$$\"3=+++!Qel(**Fap$\"3M>X1*
+\\\\Kx&F07$$\"35+++]iT$)**Fap$\"3+i8/8bdFhF07$$\"3i*****\\6u-***Fap$\"
+3M!))*o&G`vw'F07$$\"3C+++!)>8(***Fap$\"3gb6nW*G5*))F07$%*undefinedGF^a
+l-%'COLOURG6&%$RGBG$\"#5!\"\"F(F(-%+AXESLABELSG6$Q\"Z6\"Q!Fjal-%%VIEWG
+6$;F($\"$,\"!\"#%(DEFAULTG" 1 2 0 1 10 0 2 9 1 4 2 1.000000 45.000000 
+45.000000 0 0 "Curve 1" }}}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 96 "To fin
+d the point where the deviation is minimal, the first derivate is calc
+ulated. This is also" }}{PARA 0 "" 0 "" {TEXT -1 39 "known as the sens
+itivity function of T." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "d
+iffT:=diff(T,Z);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%&diffTG,$*,$\"(K
+AY$!\"$\"\"\",&-%#lnG6#*&,&F*F*%\"ZG!\"\"F*F1F2F*$\"+60007!\")F*!\"#,&
+*&F*F*F1F2F2*&F0F*F1F6F2F*F0F2F1F*F2" }}}{EXCHG {PARA 0 "" 0 "" {TEXT 
+-1 79 "Now a plot of the derivate suggests that the minimim change is \+
+around Z = 0.42." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 25 "plot(di
+ffT,Z=0.10..0.90);" }}{PARA 13 "" 1 "" {GLPLOT2D 333 314 314 
+{PLOTDATA 2 "6%-%'CURVESG6$7Y7$$\"3/+++++++5!#=$\"31Q$)4)>d]*=!#:7$$\"
+3ULLLLsPu6F*$\"35=Q]6c+)o\"F-7$$\"3ommmJ>5E8F*$\"3K#e8f@)\\^:F-7$$\"3c
+LLLBAt'\\\"F*$\"3E%4qMa:5V\"F-7$$\"3QLLLjN\\o;F*$\"32Z>dA*Q]L\"F-7$$\"
+3qmmm^&Q%R=F*$\"33IfWb(G!e7F-7$$\"3QLLLQk#z*>F*$\"3C:gDK%>#*>\"F-7$$\"
+3)******\\YJ?;#F*$\"3%RG!>@sO[6F-7$$\"3JLLL=\"\\<L#F*$\"3m_c=k(HW5\"F-
+7$$\"3.+++&[A4]#F*$\"3eHCTpPzn5F-7$$\"3Anmm'3Q\\n#F*$\"3![-=!41IO5F-7$
+$\"3YLLLB6@GGF*$\"3^KN3nn(H,\"F-7$$\"3^+++g-w+IF*$\"3\\\\]`he%)4**!#;7
+$$\"3;++++z,uJF*$\"3y!)))\\8-#)G(*Fdo7$$\"3w******RP)4M$F*$\"3yZQ.d&)y
+(e*Fdo7$$\"33LLL=Zg#\\$F*$\"3'>w5xPx`[*Fdo7$$\"3ymmmEn*Gn$F*$\"3I0lzYn
+o#R*Fdo7$$\"3jmmm1xiDQF*$\"39wlU!HdrL*Fdo7$$\"3C+++X,H.SF*$\"3=[pk.t](
+H*Fdo7$$\"3_mmm1:bgTF*$\"3G$*>G&G6QG*Fdo7$$\"3S+++X@4LVF*$\"3G$=t_vs6H
+*Fdo7$$\"3#)*****\\j\"R(\\%F*$\"3--H_i`e>$*Fdo7$$\"3?nmm;4#)oYF*$\"3o+
+xnG8Tr$*Fdo7$$\"3Tmmm6lCE[F*$\"3'eB*GTs:R%*Fdo7$$\"3qLLL$G^g*\\F*$\"3f
+#p#eR=PM&*Fdo7$$\"3!HLL$=2Vs^F*$\"3C1PA>7^e'*Fdo7$$\"3D+++N&pfK&F*$\"3
+_dtD>0b)y*Fdo7$$\"37LLLjcz\"\\&F*$\"3'*=XMIMQ`**Fdo7$$\"3%*******z-6jc
+F*$\"3%*3<2!4?_,\"F-7$$\"3h******4#32$eF*$\"3B48(ej=x.\"F-7$$\"3-+++Dy
+'G*fF*$\"3-*G![k`ji5F-7$$\"3_******H%=H<'F*$\"3ue@#34IV4\"F-7$$\"3Wlmm
+1>qMjF*$\"3>!e\"z35'o7\"F-7$$\"3H++++.W2lF*$\"3yOaAl%)Rm6F-7$$\"3uKLLe
+p'Rm'F*$\"30=8w$=1r?\"F-7$$\"3()******R>4NoF*$\"3Y'yyo(etd7F-7$$\"3glm
+m6s5'*pF*$\"3%zfp:Gg@J\"F-7$$\"3=+++lXTkrF*$\"3;3=K9fLx8F-7$$\"3Lmmmmd
+'*GtF*$\"3![j)H%Q'z]9F-7$$\"3'*)****\\iN7](F*$\"3Z6X9(p\"=S:F-7$$\"3wL
+LLt>:nwF*$\"3\"4=z@Qe5k\"F-7$$\"3)GLLLSDo$yF*$\"3Y1o6V2%Hw\"F-7$$\"3)p
+mm;&Q40!)F*$\"3su9N?9_2>F-7$$\"3c******z]rf\")F*$\"3U'\\Pn5Kr1#F-7$$\"
+3#ommmXGpL)F*$\"3+(>PtyP<H#F-7$$\"3E+++N$zhT)F*$\"3n`Fnarf5CF-7$$\"3eK
+LL8-V&\\)F*$\"3Ict4#3jNa#F-7$$\"31nm;z\"G*z&)F*$\"3*>].ZMGPq#F-7$$\"3U
++++XhUk')F*$\"3!pL>%*Rxm)GF-7$$\"3i+++![,`u)F*$\"31e!e.W.x3$F-7$$\"3t*
+****\\\"o<E))F*$\"3W:XK2L#)>LF-7$$\"39++D6Ejp))F*$\"3OTKthG!*fMF-7$$\"
+3`++]2%)38*)F*$\"3IgU!)f^]7OF-7$$\"3#4+]P?Wl&*)F*$\"31Frsg\"=$zPF-7$$
+\"3A+++++++!*F*$\"3mA'G#H?MiRF--%'COLOURG6&%$RGBG$\"#5!\"\"$\"\"!F_]lF
+^]l-%+AXESLABELSG6$Q\"Z6\"Q!Fd]l-%%VIEWG6$;$F\\]l!\"#$\"#!*F[^l%(DEFAU
+LTG" 1 2 0 1 10 0 2 9 1 4 2 1.000000 45.000000 45.000000 0 0 "Curve 1
+" }}}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 103 "Of course, we need the seco
+nd derivate to calculate where the first derivate is changing from dec
+ending" }}{PARA 0 "" 0 "" {TEXT -1 13 "to ascending." }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 22 "diffT2:=diff(diffT,Z);" }}{PARA 11 "" 1 "
+" {XPPMATH 20 "6#>%'diffT2G,**,$\"(kW#p!\"$\"\"\",&-%#lnG6#*&,&F*F*%\"
+ZG!\"\"F*F1F2F*$\"+60007!\")F*F),&*&F*F*F1F2F2*&F0F*F1!\"#F2\"\"#F0F9F
+1F:F**,$\"(KAY$F)F*F+F9,&*&F:F*F1F9F**(F:F*F0F*F1F)F*F*F0F2F1F*F2*,$F=
+F)F*F+F9F6F*F0F9F1F*F2**$F=F)F*F+F9F6F*F0F2F2" }}}{EXCHG {PARA 0 "" 0 
+"" {TEXT -1 29 "And plot the second derivate." }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 26 "plot(diffT2,Z=0.10..0.90);" }}{PARA 13 "" 1 "" 
+{GLPLOT2D 355 350 350 {PLOTDATA 2 "6%-%'CURVESG6$7X7$$\"3/+++++++5!#=$
+!3a#oPvqA*)Q\"!#97$$\"3ULLLLsPu6F*$!32sCKn\\b95F-7$$\"3ommmJ>5E8F*$!3'
+3)[LZ'*>uz!#:7$$\"3cLLLBAt'\\\"F*$!3)*>pcgM.ZiF87$$\"3QLLLjN\\o;F*$!3'
+H%=>YYz#*\\F87$$\"3qmmm^&Q%R=F*$!3o%\\nX:0(fSF87$$\"3QLLLQk#z*>F*$!3#R
+hp#QDJ(Q$F87$$\"3)******\\YJ?;#F*$!3WG=6TmFIGF87$$\"3JLLL=\"\\<L#F*$!3
+[$4@xJ[KO#F87$$\"3.+++&[A4]#F*$!3QESL4unz>F87$$\"3Anmm'3Q\\n#F*$!3Q&*f
+NrhJ\\;F87$$\"3YLLLB6@GGF*$!3a$=%z()))y*R\"F87$$\"3^+++g-w+IF*$!37p$)*
+y'e$\\:\"F87$$\"3;++++z,uJF*$!3Y/;uwfV\"R*!#;7$$\"3w******RP)4M$F*$!3=
+7%*)G)4*R`(Fjo7$$\"33LLL=Zg#\\$F*$!35$Hk#\\bk&*fFjo7$$\"3ymmmEn*Gn$F*$
+!3U2%pmog$4VFjo7$$\"3jmmm1xiDQF*$!37\"*fOk+ZuHFjo7$$\"3C+++X,H.SF*$!3F
+U*46?(3,:Fjo7$$\"3_mmm1:bgTF*$!3E*GW\"G;^pC!#<7$$\"3S+++X@4LVF*$\"3ae(
+ei/,i4\"Fjo7$$\"3#)*****\\j\"R(\\%F*$\"3IwLfm`thBFjo7$$\"3?nmm;4#)oYF*
+$\"3kGC%\\Mfpo$Fjo7$$\"3Tmmm6lCE[F*$\"3BeDCilKC\\Fjo7$$\"3qLLL$G^g*\\F
+*$\"3e%ym;nj')H'Fjo7$$\"3!HLL$=2Vs^F*$\"3QE?u\\6b!z(Fjo7$$\"3D+++N&pfK
+&F*$\"3qtK8$p'3h\"*Fjo7$$\"37LLLjcz\"\\&F*$\"39m`\\\\0xt5F87$$\"3%****
+***z-6jcF*$\"3--X!3u\"y\\7F87$$\"3h******4#32$eF*$\"3JA3(*z5'zV\"F87$$
+\"3-+++Dy'G*fF*$\"3mivR+V[Q;F87$$\"3_******H%=H<'F*$\"3e3Ed3\"3s)=F87$
+$\"3Wlmm1>qMjF*$\"3OWX3F`LR@F87$$\"3H++++.W2lF*$\"3IM_u];SXCF87$$\"3uK
+LLep'Rm'F*$\"3ezx_>E1jFF87$$\"3()******R>4NoF*$\"3Y-!>B=5Z;$F87$$\"3gl
+mm6s5'*pF*$\"3(e!3G^[42OF87$$\"3=+++lXTkrF*$\"3QQmD(3YQ:%F87$$\"3Lmmmm
+d'*GtF*$\"3G%y+^<5Xz%F87$$\"3'*)****\\iN7](F*$\"3#*[^+z1>6cF87$$\"3wLL
+Lt>:nwF*$\"3O`LP&*3x$e'F87$$\"3)GLLLSDo$yF*$\"3a6\"**[L0E$yF87$$\"3)pm
+m;&Q40!)F*$\"3f(>m]1?*>%*F87$$\"3c******z]rf\")F*$\"3pG&=K[B18\"F-7$$
+\"3#ommmXGpL)F*$\"3A1N\"=\"*>)>9F-7$$\"3eKLL8-V&\\)F*$\"3Y#p@;dDox\"F-
+7$$\"31nm;z\"G*z&)F*$\"3_FoFXrs@?F-7$$\"3U+++XhUk')F*$\"3?qdA)[n#=BF-7
+$$\"3i+++![,`u)F*$\"3-tH.NsdkEF-7$$\"3t*****\\\"o<E))F*$\"3yHIol)Q34$F
+-7$$\"39++D6Ejp))F*$\"3CX6#4'QjhLF-7$$\"3`++]2%)38*)F*$\"3+4$e6[_\"oOF
+-7$$\"3#4+]P?Wl&*)F*$\"3T)>GwCbo,%F-7$$\"3A+++++++!*F*$\"3(pb2Cd8dT%F-
+-%'COLOURG6&%$RGBG$\"#5!\"\"$\"\"!F\\]lF[]l-%+AXESLABELSG6$Q\"Z6\"Q!Fa
+]l-%%VIEWG6$;$Fi\\l!\"#$\"#!*Fh]l%(DEFAULTG" 1 2 0 1 10 0 2 9 1 4 2 
+1.000000 45.000000 45.000000 0 0 "Curve 1" }}}}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 90 "To find the exact point there de second derivate is zero,
+ we use Matlab's fsolve function." }}{PARA 0 "" 0 "" {TEXT -1 22 "We n
+ame that value Z0." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 34 "Z0:=f
+solve(diffT2=0,Z=0.10..0.90);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#Z0
+G$\"+:2-#>%!#5" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 81 "To find the cor
+responding temperature, we fill in Z0 into function T and find T0." }}
+}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "T0:=eval(T,Z=Z0);" }}{PARA 
+11 "" 1 "" {XPPMATH 20 "6#>%#T0G$\"+N<T(z#!\"(" }}}{EXCHG {PARA 0 "" 
+0 "" {TEXT -1 39 "Now calculate the sensitivity in Z = Z0" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "S:=eval(diffT,Z=Z0);" }}{PARA 11 "
+" 1 "" {XPPMATH 20 "6#>%\"SG$\"+2IU$G*!\")" }}}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 64 "Now we can construct a linear function for T using S, T0 \+
+and Z0." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 18 "Tlin:=S*(Z-Z0)+T
+0;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%TlinG,&*&$\"+2IU$G*!\")\"\"\"
+%\"ZGF*F*$\"+?([#3C!\"(F*" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 79 "Let'
+s plot them both. As one can see, the two functions produce almost the
+ same" }}{PARA 0 "" 0 "" {TEXT -1 37 "results for the range Z = [0.2, \+
+0.6]." }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 28 "plot([T,Tlin],Z=0.
+10..0.90);" }}{PARA 13 "" 1 "" {GLPLOT2D 333 324 324 {PLOTDATA 2 "6&-%
+'CURVESG6$7S7$$\"3/+++++++5!#=$\"3()H\"\\IkB+V#!#:7$$\"3ULLLLsPu6F*$\"
+39rX:j%p6Y#F-7$$\"3ommmJ>5E8F*$\"3==FefNq&[#F-7$$\"3cLLLBAt'\\\"F*$\"3
+(>BKv726^#F-7$$\"3QLLLjN\\o;F*$\"3>@H/?9$[`#F-7$$\"3qmmm^&Q%R=F*$\"3)G
+x'HLB(pb#F-7$$\"3QLLLQk#z*>F*$\"3Q\"*R#)z/VwDF-7$$\"3)******\\YJ?;#F*$
+\"3#eVD8`!o&f#F-7$$\"3JLLL=\"\\<L#F*$\"3(>+QLI'y9EF-7$$\"3.+++&[A4]#F*
+$\"3'))4*e\"G^Jj#F-7$$\"3Anmm'3Q\\n#F*$\"3g,Y19-X^EF-7$$\"3YLLLB6@GGF*
+$\"3Q&)=#*z-:nEF-7$$\"3^+++g-w+IF*$\"3q0,])HLWo#F-7$$\"3;++++z,uJF*$\"
+3\"[g$)ykS9q#F-7$$\"3w******RP)4M$F*$\"3Y\"QaOSivr#F-7$$\"33LLL=Zg#\\$
+F*$\"38>d)y\"*=?t#F-7$$\"3ymmmEn*Gn$F*$\"3+u7Rs@.\\FF-7$$\"3jmmm1xiDQF
+*$\"3oD]L:FLjFF-7$$\"3C+++X,H.SF*$\"3#Q]83C#))zFF-7$$\"3_mmm1:bgTF*$\"
+3/?..u-\\%z#F-7$$\"3S+++X@4LVF*$\"3+PztS;^5GF-7$$\"3#)*****\\j\"R(\\%F
+*$\"3If&e[[(zDGF-7$$\"3?nmm;4#)oYF*$\"3</G%3;:=%GF-7$$\"3Tmmm6lCE[F*$
+\"3e76lI*=m&GF-7$$\"3qLLL$G^g*\\F*$\"37(pU!3YssGF-7$$\"3!HLL$=2Vs^F*$
+\"3]\\qu!*ok*)GF-7$$\"3D+++N&pfK&F*$\"3,s57$ftX!HF-7$$\"37LLLjcz\"\\&F
+*$\"37L)zNiQ4#HF-7$$\"3%*******z-6jcF*$\"3E^V]Ai:QHF-7$$\"3h******4#32
+$eF*$\"3)*\\[7L_NbHF-7$$\"3-+++Dy'G*fF*$\"3A*oe-Z!QsHF-7$$\"3_******H%
+=H<'F*$\"3uE6k+>z\"*HF-7$$\"3Wlmm1>qMjF*$\"3#4@<W+a(4IF-7$$\"3H++++.W2
+lF*$\"3CCe`&4`&HIF-7$$\"3uKLLep'Rm'F*$\"3G!\\p-XA\"[IF-7$$\"3()******R
+>4NoF*$\"3U`\\FdC?pIF-7$$\"3glmm6s5'*pF*$\"39v[jJD))*3$F-7$$\"3=+++lXT
+krF*$\"3_^bjLF]7JF-7$$\"3Lmmmmd'*GtF*$\"3^R)zs\"pvNJF-7$$\"3'*)****\\i
+N7](F*$\"3oj(y%3&*\\hJF-7$$\"3wLLLt>:nwF*$\"3?!*3]2#oy=$F-7$$\"3)GLLLS
+Do$yF*$\"3')yPB&p;n@$F-7$$\"3)pmm;&Q40!)F*$\"3!=3*oX/cZKF-7$$\"3c*****
+*z]rf\")F*$\"3a>Cy47DyKF-7$$\"3#ommmXGpL)F*$\"3!=L\"f-#)z;LF-7$$\"3eKL
+L8-V&\\)F*$\"3M5F09Q/bLF-7$$\"3U+++XhUk')F*$\"3w$=mHz*z+MF-7$$\"3t****
+*\\\"o<E))F*$\"3g+Z$)os#3X$F-7$$\"3A+++++++!*F*$\"38[=B#3'y8NF--%'COLO
+URG6&%$RGBG$\"#5!\"\"$\"\"!F`[lF_[l-F$6$7S7$F($\"34++2]H3,DF-7$F/$\"3o
+O#oi7rs^#F-7$F4$\"3([h?=Pc8`#F-7$F9$\"3M4Td.n>ZDF-7$F>$\"3s+)G`.UJc#F-
+7$FC$\"3%300<e6!zDF-7$FH$\"3as\"REoCPf#F-7$FM$\"3G*QSkCf*3EF-7$FR$\"3Q
+wo6a[rCEF-7$FW$\"3?E(fL$*>/k#F-7$Ffn$\"39>1wPXdcEF-7$F[o$\"3ef+6AN!3n#
+F-7$F`o$\"3-`<O))>#oo#F-7$Feo$\"3Y)*[(zA1Hq#F-7$Fjo$\"3&*)GzJP1%=FF-7$
+F_p$\"3PC`'**)>[KFF-7$Fdp$\"3?Bnuf#>#\\FF-7$Fip$\"3wfGoAzRjFF-7$F^q$\"
+3a$*yNy5*)zFF-7$Fcq$\"3qyzy:.\\%z#F-7$Fhq$\"3iRM5$*z]5GF-7$F]r$\"3]$[e
+(41wDGF-7$Fbr$\"3*>YL^6v;%GF-7$Fgr$\"3A)fQ!*f*GcGF-7$F\\s$\"3S&[yUH`?(
+GF-7$Fas$\"3!>*oKVtU))GF-7$Ffs$\"35,!e6+\"o-HF-7$F[t$\"3!\\J2@Mv!=HF-7
+$F`t$\"3G-`k-#zR$HF-7$Fet$\"3!z<Qu-Q&\\HF-7$Fjt$\"3g]^W!*>fkHF-7$F_u$
+\"3UjRt\\oI\")HF-7$Fdu$\"3wg$GU*eK'*HF-7$Fiu$\"3$**)p(*H>O7IF-7$F^v$\"
+3)[z)yhH*o-$F-7$Fcv$\"3zivq<#zF/$F-7$Fhv$\"3c\\A[YpsdIF-7$F]w$\"3ApS/I
+;NtIF-7$Fbw$\"3C()y:9wi)3$F-7$Fgw$\"3#)H0#Q:?Y5$F-7$F\\x$\"3,\"3u-(G-?
+JF-7$Fax$\"30n9^sVxNJF-7$Ffx$\"3!fcdVW&R^JF-7$F[y$\"3[oB/(e\\d;$F-7$F`
+y$\"3SBLUa5?#=$F-7$Fey$\"3u:#oHW:p>$F-7$Fjy$\"3c`%p,0/E@$F-7$F_z$\"3-5
+A3\\+iFKF-7$Fdz$\"32++j!zcPC$F--Fiz6&F[[lF_[lF\\[lF_[l-%+AXESLABELSG6$
+Q\"Z6\"Q!F]el-%%VIEWG6$;$F][l!\"#$\"#!*Fdel%(DEFAULTG" 1 2 0 1 10 0 2 
+9 1 4 2 1.000000 45.000000 45.000000 0 0 "Curve 1" "Curve 2" }}}}
+{EXCHG {PARA 0 "" 0 "" {TEXT -1 102 "Now create a relative difference \+
+function. This will show how good the approximation of Tlin for T is.
+" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 32 "DeltaTandTlin:=((T-Tlin
+)/T)*100;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%.DeltaTandTlinG,$*($\"+
++-J))G!#6\"\"\",(*&$\"(KAY$!\"$F*,&-%#lnG6#*&,&F*F*%\"ZG!\"\"F*F6F7F*$
+\"+60007!\")F*F7F**&$\"+2IU$G*F:F*F6F*F7$\"+?([#3C!\"(F7F*F0F*F*" }}}
+{EXCHG {PARA 0 "" 0 "" {TEXT -1 101 "Now plot that function. One can s
+ee that the difference is less than 1% for the range Z = [0.12, 0.7]" 
+}}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 33 "plot(DeltaTandTlin,Z=0.17
+..0.70);" }}{PARA 13 "" 1 "" {GLPLOT2D 338 321 321 {PLOTDATA 2 "6%-%'C
+URVESG6$7S7$$\"37+++++++<!#=$!3w>'>+(4_l5!#<7$$\"3ZLL3<\\_:=F*$!3'QG!
+\\DQvU*)F*7$$\"3nm\"H(HD/;>F*$!3=Q9NyAK[wF*7$$\"3JL$ez4&3H?F*$!3A*pWH:
+o>Q'F*7$$\"3^L$3d)p(G9#F*$!3A?7![YkXG&F*7$$\"3qm\"z//GhD#F*$!3Y(*o%H6w
+oM%F*7$$\"3;LeRli7hBF*$!3QN^WTNl)f$F*7$$\"3)**\\ib%e%)pCF*$!3T(o&z;iRK
+HF*7$$\"3[Le*3z$G#e#F*$!3%R@XIRfgM#F*7$$\"3++DJY6O%p#F*$!3aK*fAqDL&=F*
+7$$\"3qmmT#[Y'4GF*$!3rI+X/vaI9F*7$$\"3BL$3#p)*=6HF*$!32<Ik))4V?6F*7$$
+\"30++DsO]DIF*$!3D/ZU[mNE$)!#>7$$\"3\"****\\(eoGSJF*$!3rG`TAVo3gFdo7$$
+\"3k***\\xs,4D$F*$!3[Cxo4eNXUFdo7$$\"35Le*ei]8N$F*$!3/Gtd\\J*)*)HFdo7$
+$\"3cmmT\"3%zqMF*$!3/m!z\"*o,H'=Fdo7$$\"3Ammmb$y>d$F*$!3!>!oYem?r6Fdo7
+$$\"3')*\\i5sz'*o$F*$!3k([hE8,o:'!#?7$$\"3/mm;t`'Qz$F*$!3-]?_\")[dOIFc
+q7$$\"3++D1YN<3RF*$!37c[\"eC)f*3\"Fcq7$$\"3'**\\(=e>-<SF*$!3<WKe*ou=`#
+!#@7$$\"3tm;HdQfITF*$!3Q98?NWc*3\"!#A7$$\"35n\"zRJ))[B%F*$\"3B;9aU'oui
+$!#B7$$\"3?L$3_(RQZVF*$\"3I&p%R&R\"HK<Fcr7$$\"3CLe*3NNUY%F*$\"3y'H!*R'
+*R$f#*Fcr7$$\"3s*\\Pp\"[&fc%F*$\"3=e*3'Q^/)Q#Fcq7$$\"3QL$epi9en%F*$\"3
++Es(o*zdY^Fcq7$$\"3q****\\g0J*y%F*$\"3m*oa>$R4U'*Fcq7$$\"3#***\\7*=W.!
+\\F*$\"3)fEqOZ<@g\"Fdo7$$\"3'**\\iS$\\x2]F*$\"3vu<%*G9$)RCFdo7$$\"33**
+\\()f%eq7&F*$\"3Iyk8gNGkOFdo7$$\"3alm;8+CM_F*$\"3gi&fEZ6\\1&Fdo7$$\"3K
+***\\()>z'[`F*$\"3#H+x:NRP\"pFdo7$$\"3QKe*)4\"yBX&F*$\"3!f\\Z%*f/(Q*)F
+do7$$\"3))***\\-T[dc&F*$\"3I2vGMfBd6F*7$$\"3Ml\"Hx-@Cn&F*$\"3!fM75'e*)
+[9F*7$$\"3i*\\7$\\Y#Ry&F*$\"3IM=lGtU.=F*7$$\"33mmT?)RH*eF*$\"3!z**otVC
+M?#F*7$$\"3n*\\i:goq+'F*$\"3IQH9Grj$o#F*7$$\"3vKLL#=))p6'F*$\"3#f_P:>g
+0@$F*7$$\"3UK$3(HoRHiF*$\"3j=;)zEK-#QF*7$$\"3#o;Hnnu3M'F*$\"3\"eY]5:S8
+]%F*7$$\"3E****\\S7JVkF*$\"3S*QHZ!\\l*>&F*7$$\"3cm;a-^rglF*$\"3?C&\\%)
+\\f@4'F*7$$\"3CKLL;DslmF*$\"35YuK(Qf.)pF*7$$\"3C*\\i5K#oxnF*$\"3F;*f+j
+5&G!)F*7$$\"3E*\\P*R@%[)oF*$\"3!oN>xzqs8*F*7$$\"3a**************pF*$\"
+3a%fe(p[MX5F--%'COLOURG6&%$RGBG$\"#5!\"\"$\"\"!Fe[lFd[l-%+AXESLABELSG6
+$Q\"Z6\"Q!Fj[l-%%VIEWG6$;$\"#<!\"#$\"#qFb\\l%(DEFAULTG" 1 2 0 1 10 0 
+2 9 1 4 2 1.000000 45.000000 45.000000 0 0 "Curve 1" }}}}{EXCHG {PARA 
+0 "" 0 "" {TEXT -1 102 "Of course there was a smart guy a few hundred \+
+years ago who solved this problem of linearizing for us." }}{PARA 0 "
+" 0 "" {TEXT -1 105 "He was called Taylor and derived for us the Taylo
+r expansion series, to arbitrary approximate a function." }}{PARA 0 "
+" 0 "" {TEXT -1 88 "We use the Taylor series for T around Z = Z0 and t
+wo terms only, and tada! Our function!" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 17 "taylor(T,Z=Z0,2);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#
++),&%\"ZG\"\"\"$\"+:2-#>%!#5!\"\"$\"+N<T(z#!\"(\"\"!$\"+2IU$G*!\")F&-%
+\"OG6#F&\"\"#" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}{PARA 
+11 "" 1 "" {TEXT -1 0 "" }}}}{MARK "33 2 0" 88 }{VIEWOPTS 1 1 0 1 1 
+1803 1 1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }
