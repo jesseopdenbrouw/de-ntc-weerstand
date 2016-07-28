@@ -717,7 +717,78 @@ nu de $U_{O,min}$ en $U_{O,max}$ uitrekenen bij optimale waarde voor $R_S$:
 \dfrac{U_{O,max}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_K + \sqrt{R_G\cdot R_K}}
 \end{equation}
 
+Deze functies zien er niet handig uit. Daarom introduceren we een hulpvariabele
+$\epsilon$ (epsilon) met de volgende definitie:
 
+\begin{equation}
+R_K = \epsilon\cdot R_G \qquad\qquad\text{of}\qquad\qquad \epsilon=\dfrac{R_K}{R_G}
+\end{equation}
+
+Nu wordt:
+
+\begin{equation}
+\dfrac{U_{O,min}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_G + \sqrt{R_G\cdot R_K}}
+                       = \dfrac{\sqrt{\epsilon\cdot R_G\cdot R_G}}{R_G+\sqrt{\epsilon\cdot R_G\cdot R_G}}
+                       = \dfrac{R_G\cdot\sqrt{\epsilon}}{R_G+R_G\cdot\sqrt{\epsilon}}
+                       = \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}}
+%%\qquad\text{en}\qquad
+%%\dfrac{U_{O,max}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_K + \sqrt{R_G\cdot R_K}}
+\end{equation}
+
+en
+
+\begin{equation}
+\dfrac{U_{O,max}}{U_B} = \dfrac{1}{1+\sqrt{\epsilon}}
+\end{equation}
+
+De relatieve spanningsswing is nu:
+\begin{equation}
+\dfrac{U_{O,max}}{U_B} - \dfrac{U_{O,min}}{U_B} = \dfrac{U_{O,max-U_{O,min}}}{U_B} =
+\dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}} - \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}} =
+\dfrac{1 - \sqrt{\epsilon}}{1+\sqrt{\epsilon}}
+\end{equation}
+In figuur~\ref{fig:ntc_graph1} is een grafiek gegeven met daarin de belangrijkste
+parameters en hoe zij zich tot elkaar verhouden.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.63]{drawings/ntc_graph1}
+\caption{Verloop van de uitgangsspanning als functie van de weerstandswaarde van de NTC.}
+\label{fig:ntc_graph1}
+\end{figure}
+
+
+
+
+
+
+
+\subsubsection*{Voorbeeld}
+We willen de temperatuur meten tussen \mathcelc{0} en \mathcelc{30}. In
+tabel~\ref{tab:specsntc} zoeken we de bijbehorende weerstandswaarde de de NTC
+kan aannemen: $R_G=32.650\ \Omega$ bij \mathcelc{0} en $R_K= 8.056\ \Omega$
+bij \mathcelc{30}. We de kunnen nu de optimale serieweerstand uitrekenen:
+\begin{equation}
+R_{opt} = \sqrt{R_K\cdot R_G} = \sqrt{8056\cdot32650} = 16218\ \Omega
+\end{equation}
+De verhouding $\epsilon$ is: 
+\begin{equation}
+\epsilon = \sqrt{\dfrac{R_K}{R_G}} = \dfrac{8056}{32650} = 0,2467
+\end{equation}
+De minimale en maximale spanningen zijn:
+\begin{equation}
+U_{O,min} = \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\cdot U_B =
+          = \dfrac{0,4967}{1+0,4967}\cdot U_B = 0,3319\cdot U_B
+\end{equation}
+\begin{equation}
+U_{O,max} = \dfrac{1}{1+\sqrt{\epsilon}}\cdot U_B =
+          = \dfrac{1}{1+0,4967}\cdot U_B = 0,6681\cdot U_B
+\end{equation}
+De spanningsswing is:
+\begin{equation}
+U_{SWING} = \dfrac{1-\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\cdot U_B =
+          = \dfrac{1-0,4967}{1+0,4967}\cdot U_B = 0,3362\cdot U_B
+\end{equation}
 
 
 
