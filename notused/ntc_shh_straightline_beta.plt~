@@ -19,12 +19,14 @@ SST = FIT_WSSR/(FIT_NDF+1)
 # Do a fit using a power function:
 R0 = 10000.0
 T0 = 273.15+25.0
+#A = 0.1
 B = 5000.0
 straightline_beta(x) = B*x + log(R0) - B/T0
 fit straightline_beta(x) "GegevensBetatherm10K3A542I.dat" using 3:4 via B
 
 ### Caculcate some ...
 SSE=FIT_WSSR/(FIT_NDF)
+
 SSR=SST-SSE
 R2=SSR/SST
 

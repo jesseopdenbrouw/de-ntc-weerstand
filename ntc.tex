@@ -104,6 +104,27 @@
 \titlespacing*{\subsection}{0pt}{.8\baselineskip}{\aftersubsection}
 \titlespacing*{\subsubsection}{0pt}{.6\baselineskip}{0pt}
 
+
+%% Making captions nicer...
+\usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=sl,up]{caption}
+\DeclareCaptionLabelSeparator{emdash}{\ \ ---\ \ }
+%\usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=it,up]{subcaption}
+\usepackage[labelformat=simple,font=footnotesize,format=plain,labelfont=bf,textfont=sl]{subcaption}
+%\captionsetup[table]{justification=raggedright,singlelinecheck=off,skip=3pt}
+%\captionsetup[figure]{justification=centering,singlelinecheck=off,belowskip=-1ex,labelsep=emdash}
+%\captionsetup[figure]{format=hang,justification=centering,singlelinecheck=off,belowskip=-1ex}
+\captionsetup[figure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[table]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[subfigure]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+\captionsetup[subtable]{format=hang,justification=centering,singlelinecheck=off,skip=2ex}
+%% Put parens around the subfig name (a) (b) etc. Needs labelformat simple
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
+%%\DeclareCaptionLabelFormat{unnumbered}{#1}
+%%\captionsetup[floatingminipage]{labelformat=unnumbered}
+
+
+
 % http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/footmisc/footmisc.pdf
 % ruimte onder aan de pagina tussen tekst en voetnoot niet na voetnoot
 % package moet VOOR fancyhdr om warning te voorkomen
@@ -119,7 +140,7 @@
 
 %% Making captions nicer...
 %% http://ctan.cs.uu.nl/macros/latex/contrib/caption/caption-eng.pdf
-\usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+%\usepackage[font=footnotesize,format=plain,labelfont=bf,textfont=sl]{caption}
 
 %% Using hyperrefs...
 %% http://ctan.cs.uu.nl/macros/latex/contrib/hyperref/hyperref.pdf
@@ -160,6 +181,7 @@
   \vskip 3cm
   \begin{center}\leavevmode
     {\LARGE \@title\par}%
+    {\large \subtitle\par}%
     \vskip 1cm
     {\large \@author\par}%
     \vskip 0.03cm
@@ -174,7 +196,8 @@
 
 %% Author's credentials
 \author{Jesse op den Brouw}
-\title{NTC}
+\title{De NTC-weerstand}
+\newcommand{\subtitle}{Het wel en wee van de NTC!}
 \date{\today}
 \newcommand{\figscale}{1.0}
 
@@ -224,6 +247,15 @@
 \usepackage{threeparttablex} % for "ThreePartTable" environment
 \usepackage{booktabs} 
 
+%% Lesser and more space around the binay dot
+\let\oldcdot\cdot
+%%%\renewcommand{\cdot}{\kern-.12em\oldcdot\kern-.12em}
+%%%\newcommand{\cdotw}{\kern.10em\oldcdot\kern.10em}
+%%%\newcommand{\cdotww}{\kern.20em\oldcdot\kern.20em}
+\renewcommand{\cdot}{\kern-.10em\oldcdot\kern-.10em}
+\newcommand{\cdotw}{\kern.08em\oldcdot\kern.08em}
+\newcommand{\cdotww}{\kern.16em\oldcdot\kern.16em}
+
 
 %% Ahhhh... At last, the beginning of the document...
 \begin{document}
@@ -241,7 +273,8 @@ Blabla
 \clearpage
 %\renewcommand\contentsname{Table of Contents}
 \tableofcontents
-\vspace{1cm}
+%\vspace{1cm}
+\clearpage
 \listoffigures
 \vspace{1cm}
 %\renewcommand{\lstlistlistingname}{List of Listings}
@@ -256,7 +289,25 @@ Opmerkingen over dit document kunnen worden gestuurd naar
 
 \section{Introductie}
 Een \textsl{negatieve temperatuur-co\"effici\"ent}-weerstand, afgekort NTC,
-is een weerstand waarvan de waarde afneemt bij toenemende temperatuur.
+is een weerstand waarvan de waarde afneemt bij toenemende temperatuur. De
+NTC wordt gebruikt in analoge schakelingen om bijvoorbeeld iets te schakelen
+bij een bepaalde temperatuur, meestal in combinatie met een Schmitt-trigger.
+In digitale schakelingen wordt de temperatuur berekend met behulp van een
+analoog-digitaal converter (ADC) en software. Denk hierbij bijvoorbeeld aan
+een thermostaat. 
+\subsection{Constructie en eigenschappen}
+Een NTC is een semiconductor weerstand en is erg gevoelig voor kleine variaties
+in temperatuur~\cite{jespersen1982thermal}. Er zijn diverse vormen mogelijk:
+een staaf, schijf of plaatje of de vorm van een druppel. Ze kunnen ingegoten
+worden in isolerend materiaal, bijvoorbeeld plastic of glas.
+NTC's worden gemaakt van een mengsel van metaaloxiden zoals kobalt, koper,
+magnesium, nikkel, ijzer en uranium~\cite{bakshi2009basic}. De elektrische
+eigenschappen komen voort uit de het specifieke mengsel en de fysieke grootte
+en vorm van de NTC.
+
+
+
+
 
 In dit document wordt gebruik gemaakt van de NTC \ntctype{} van
 \ntcman~\cite{betatherm10K3A542i}. Dit is een NTC met een meetbereik van
@@ -268,14 +319,14 @@ zijn te vinden in tabel~\ref{tab:specsntc} op pagina~\pageref{tab:specsntc}.
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=\figscale]{gnuplot/ntc_ntc_plot_celsius_fig}
-\caption{Weerstand-temperatuur karakteristiek van de NTC.}
+\caption[Weerstand-temperatuur karakteristiek van de NTC]{Weerstand-temperatuur karakteristiek van de NTC (temperatuur in graden Celsius).}
 \label{fig:ntc_ntc_plot_celsius_fig}
 \end{figure}
 
 Noot: in alle wiskundige vergelijkingen wordt de temperatuur in Kelvin
 gegeven tenzij anders is vermeld.
-
-Enkele andere gegevens die door de fabrikant zijn verstrekt:
+Enkele gegevens die door de fabrikant verstrekt zijn te vinden in
+tabel~\ref{tab:enigegegevens}.
 
 \begin{table}[ht!]
 \centering
@@ -284,18 +335,25 @@ Enkele andere gegevens die door de fabrikant zijn verstrekt:
 \begin{tabu} to 0.9\textwidth {X[,l,2]X[,c,1]X[,c,1]}
 \textbf{Parameter} & \textbf{Eenheid} & \textbf{Waarde} \\[0.1ex]
 Weerstand bij \mathcelc{+25}                   & $\Omega$             & $10.000$ \\
-Toleratie van \mathcelc{0} tot \mathcelc{+70} & \mathcelc{}     & $0,2$ \\
-Alpha bij \mathcelc{+25}                       & \%/\mathcelc{} & $-4.39$ \\
+Toleratie van \mathcelc{0} tot \mathcelc{+70} & \mathcelc{\!\!}     & $0,2$ \\
+Alpha bij \mathcelc{+25}                       & \%/\mathcelc{\!} & $-4,39$ \\
 Beta-waarde 25/85                             & K               & 3976 \\
-Dissipatie-constante                          & mW/\mathcelc{}  & 2.0 (ong.) \\
+Dissipatie-constante                          & mW/\mathcelc{\!}  & $2,0$ (ong.) \\
 Thermische tijdconstante in vloeistof van \mathcelc{+25} tot  \mathcelc{+75} & s & $< 1,3$ \\[0.8ex]
 Bedrijfstemperatuur & \mathcelc{} & $-40$ tot $+125$ \\
 \end{tabu}
 \end{table}
 
 Twee belangrijke parameters zijn de Beta-waarde $B$ en de weerstandswaarde $R_0$ bij
-\mathcelc{+25}. Voor deze NTC zijn dat $B=3976$ en $R_0=10\text{ k}\Omega$. Een derde
-belangrijke parameters is de dissipatie-constante.
+\mathcelc{+25}. Voor deze NTC zijn dat $B=3976$ en $R_0=10\text{ k}\Omega$. De
+parameters worden gebruikt bij de wiskundige beschrijvingen van de NTC.
+
+Een derde belangrijke parameters is de dissipatie-constante $K$ en heeft te
+maken met zelfverwarming van de NTC. Een NTC is namelijk een weerstand en die
+dissipeert vermogen als er een stroom doorheen vloeit. Daardoor verwarmt de
+NTC zichzelf. Bij metingen moet hier rekening worden gehouden. Voor deze NTC
+is $K=2$ mW/\mathcelc{\!}.
+
 
 \section{Wiskundige beschrijvingen van de NTC}
 
@@ -311,7 +369,7 @@ goed benaderd door de vergelijking van Steinhart-Hart~\cite{STEINHART1968497}:
 Hierin is $T$ de temperatuur in K en $\rntc$ de weerstandswaarde in $\Omega$.
 De constanten $a$, $b$ en $c$ zijn Steinhart–Hart co\"effici\"enten. Deze
 co\"effici\"enten moeten voor elke type NTC worden bepaald. In principe
-zijn hier drie verschillende temperatuur-weerstanden-paren nodig.
+zijn hiervoor drie verschillende temperatuur-weerstand-paren nodig.
 
 De vergelijking kan vereenvoudigd worden met de rekenschap dat de term
 $c\cdot( \ln \rntc )^3$ slechts een kleine bijdrage levert ten opzichte van
@@ -349,10 +407,11 @@ zodat vergelijking~\eqref{equ:steinharthartnonconf} overgaat in B-parameter-verg
 \end{equation}
 
 Hierin is $R_0$ de weerstandswaarde van de NTC bij temperatuur $T_0$. Die is standaard
-gedefini\"eerd op $25\:^\circ\text{C}$ $(298,15\: \text{K})$. Merk op dat de term
-$\ln\rntc - \ln R_0$ dimensieloos is, deze kan namelijk ook als $\ln(\rntc / R_0$)
-worden geschreven. De $B$ wordt de beta-parameter genoemd en  moet door metingen
-bepaald worden.
+gedefini\"eerd op $25\:^\circ\text{C}$ $(298,15\: \text{K})$. Voor de gebruikte NTC
+is $R_0 = 10\text{ k}\Omega$.
+%%%Merk op dat de term $\ln\rntc - \ln R_0$ dimensieloos is, deze kan namelijk ook als
+%%%$\ln(\rntc / R_0$) worden geschreven.
+De $B$ wordt de beta-parameter genoemd en  moet door metingen bepaald worden.
 
 We kunnen $\rntc$ expliciet schrijven zodat de exponenti\"ele B-parameters-vergelijking
 als volgt wordt:
@@ -394,10 +453,11 @@ wijzigen.
 In figuur~\ref{fig:ntc_ntc_plot_kelvin_fig} is de weerstand-temperatuur karakteristiek
 van de NTC nogmaals weergegeven, maar nu is de temperatuur in Kelvin gegeven. Om
 deze karakteristiek te benaderen gebruiken we Steinhart-Hart vergelijk in~\eqref{equ:steinharthart}.
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=1]{gnuplot/ntc_ntc_plot_kelvin_fig}
-\caption{Weerstand-temperatuur karakteristiek van de NTC (temperatuur in Kelvin).}
+\caption[Weerstand-temperatuur karakteristiek van de NTC]{Weerstand-temperatuur karakteristiek van de NTC (temperatuur in Kelvin).}
 \label{fig:ntc_ntc_plot_kelvin_fig}
 \end{figure}
 
@@ -445,10 +505,10 @@ In figuur~\ref{fig:ntc_shh_straightline_beta_fig} is de rechte lijn uitgezet t.o
 de gegevens van de NTC. Duidelijk is te zien dat de rechte lijn afwijkingen vertoont
 bij de uiteinden van het lijnstuk, dus bij hoge en lage temperaturen.
 
-\begin{figure}[ht!]
+\begin{figure}[t!]
 \centering
 \includegraphics[scale=1]{gnuplot/ntc_shh_straightline_beta_fig}
-\caption{blabla.}
+\caption[Grafiek van de B-parameter-vergelijking]{Grafiek van de B-parameter-vergelijking. De weerstandswaarde (logaritme) is uitgezet tegen de inverse van de temperatuur.}
 \label{fig:ntc_shh_straightline_beta_fig}
 \end{figure}
 
@@ -486,17 +546,18 @@ Meestal geeft de fabrikant een Beta-co\"effici\"ent bij een temperatuur van
 \mathcelc{25} of een gemiddelde Beta tussen \mathcelc{25} en \mathcelc{85}.
 Bij de gebruikte NTC is de $B_{25/85} =$ \betamantwofiveeightfive, een $B_{25}$
 is niet gegeven. We kunnen voor elk paar van weerstandswaarde-temperatuur de
-beta uitrekenen. Uit formule~\eqref{equ:betafuncexp} wordt $B$ expliciet gemaakt:
+beta uitrekenen. Uit formule~\eqref{equ:steinharthartsimpl} wordt $B$ expliciet
+gemaakt:
 
 \begin{equation}
 \label{equ:betaexplicit}
-B = \dfrac{T_0\cdot T}{T_0 - T}\cdot\ln\dfrac{\rntc}{R_0} \qquad\qquad(T \neq T_0)
+B = \dfrac{T_0\cdot T}{T_0 - T}\cdot(\ln\rntc-\ln R_0) \qquad\qquad(T \neq T_0)
 \end{equation}
 
-\begin{figure}[ht!]
+\begin{figure}[t!]
 \centering
 \includegraphics[scale=1]{gnuplot/ntc_beta_celsius_fig}
-\caption{Beta als functie van de temperatuur (in graden Celsius).}
+\caption[Beta als functie van de temperatuur (in graden Celsius)]{Beta als functie van de temperatuur (in graden Celsius).}
 \label{fig:betavstempcelsiusplot}
 \end{figure}
 
@@ -510,7 +571,8 @@ B = a\cdot T^3 + b\cdot T^2 + c\cdot T + d
 \end{equation}
 
 in het bereik \mathcelc{-40} tot \mathcelc{+118} zijn de volgende co\"effici\"enten
-gevonden, zie tabel~\ref{tab:coefficienten}.
+gevonden, zie tabel~\ref{tab:coefficienten}. Er zijn co\"effici\"enten bepaald voor
+de temperatuur in graden Celsius en in Kelvin.
 
 \input{gnuplot/ntc_beta_celcius_curve_fitting_params}
 \input{gnuplot/ntc_beta_kelvin_curve_fitting_params}
@@ -571,27 +633,27 @@ benaderd wordt. We bewerken de vergelijking als volgt:
 Dit is de functie van een rechte lijn met $1/T$ als onafhankelijke variabele, $B$
 als richtingsco\"effici\"ent en $\ln A$ als startgetal.
 We kunnen nu $\ln \rntc$ uitzetten t.o.v.\@ $1/T$, zie
-figuur~\ref{fig:ntc_shh_straightline_fig}.
+figuur~\ref{fig:ntc_shh_straightline_adapt_fig}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=1]{gnuplot/ntc_shh_straightline_fig}
-\caption{blabla.}
-\label{fig:ntc_shh_straightline_fig}
+\includegraphics[scale=1]{gnuplot/ntc_shh_straightline_adapt_fig}
+\caption[Grafiek van de aangepaste B-parameter-vergelijking]{Grafiek van de aangepaste B-parameter-vergelijking. De weerstandswaarde (logaritme) is uitgezet tegen de inverse van de temperatuur.}
+\label{fig:ntc_shh_straightline_adapt_fig}
 \end{figure}
 
- Met behulp van het Gnuplot-script in
-listing~\ref{cod:ntc_shh_straightline} in bijlage~\ref{app:ntc_shh_straightline}
-vinden we de waarde voor $A$ en $B$. Deze
-zijn te vinden in tabel~\ref{tab:ntc_shh_straightline_curve_fitting_params}.
+Met behulp van het Gnuplot-script in listing~\ref{cod:ntc_shh_straightline_adapt}
+in bijlage~\ref{app:ntc_shh_straightline_adapt}
+vinden we de waarde voor $A$ en $B$. Deze zijn te vinden in
+tabel~\ref{tab:ntc_shh_straightline_adapt_curve_fitting_params}.
 Merk op dat de $R^2$ beter is dan die van de B-parameter vergelijking.
 Deze functie benadert de gegevens van de NTC dus beter.
 
-\input{gnuplot/ntc_shh_straightline_curve_fitting_params}
+\input{gnuplot/ntc_shh_straightline_adapt_curve_fitting_params}
 \begin{table}[ht!]
 \centering
 \caption{Co\"effici\"enten van de functie voor $B$ bij temperatuur in graden Celsius en Kelvin.}
-\label{tab:ntc_shh_straightline_curve_fitting_params}
+\label{tab:ntc_shh_straightline_adapt_curve_fitting_params}
 \begin{tabular}{c|c}
 parameter & Waarde \\ 
 \hline 
@@ -609,6 +671,167 @@ De functie is:
 
 
 
+
+
+\section{Bepalen van de weerstandswaarde van de NTC}
+
+Het is meestal niet mogelijk om direct de weerstandswaarde te gebruiken maar
+wel een afgeleide spanning daarvan. Met behulp van een eenvoudige spanningsdeler
+is deze spanning te op te wekken. Bij gebruik in analoge systemen wordt de
+uitgangsspanning van de spanningsdelen aangeboden aan een Schmitt-trigger die op
+bepaalde spanningen (en dus temperaturen) omschakelt.
+Bij gebruik van digitale systemen ligt het voor de hand
+om een analoog-digitaal-converter (ADC) te gebruiken. Veel microcontrollers hebben
+een ADC aan boord die een analoge spanning kan verwerken tussen 0 V en de
+voedingsspanning. Met behulp van software kan de temperatuur dan berekend worden.
+
+In figuur~\ref{fig:ntc_voltagediv} is de spanningsdeler te zien. Merk op dat
+de NTC bovenin is geplaatst. Dit heeft als voordeel dat bij toenemende temperatuur
+de uitgangsspanning ook toeneemt.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.63]{drawings/ntc_voltagediv}
+\caption[Eenvoudige spanningsdeler]{Eenvoudige spanningsdeler.}
+\label{fig:ntc_voltagediv}
+\end{figure}
+
+De overdracht van de spanningsdeler is:
+
+\begin{equation}
+U_O = \dfrac{R_S}{\rntc + R_S}\cdot U_B \qquad\qquad\text{of}\qquad\qquad \dfrac{U_O}{U_B}=\dfrac{R_S}{\rntc + R_S}
+\end{equation}
+
+We kunnen nu $\rntc$ expliciet maken:
+
+\begin{equation}
+\rntc = \dfrac{U_B-U_0}{U_0}\cdot R_S
+\end{equation}
+
+Door de uitgangsspanning te meten is $\rntc$ te berekenen.
+
+We kunnen nu iets zeggen over de serieweerstand $R_S$. Als deze weerstandswaarde
+veel groter is dan $\rntc$, dan ligt de uitgangsspanning $U_O$ dicht tegen de
+voedingsspanning aan en varieert niet zo veel bij verandering van de waarde van
+de NTC. Is $R_S$ veel kleiner dan $\rntc$, dan ligt de uitgangsspanning tegen
+de referentiespanning aan en varieert niet zo veel.
+
+Natuurlijk willen we de verandering van de uitgangsspanning ten gevolge van een
+verandering van $\rntc$ zo groot mogelijk hebben. We beschouwen alleen het
+temperatuurbereik tussen $T_{laag}$ en $T_{hoog}$; hierbij horen resp.\@ de
+weerstandswaarden $R_\text{NTC,groot} = R_G$ en $R_\text{NTC,klein} = R_K$.
+De waarde van de NTC varieert dus tussen $R_K$ en $R_G$. Het is eenvoudig in
+te zien dat $U_O$ maximaal is bij $\rntc = R_K$ (de noemer heeft nu de kleinst
+mogelijke waarde) en $U_O$ minimaal bij $\rntc = R_G$ (de noemer heeft nu de
+grootst mogelijke waarde)
+
+We introduceren een nieuwe term: \textsl{spanningsswing}. De spanningsswing is
+het verschil tussen de maximale uitgangsspanning en de minimale uitgangsspanning.
+De \textsl{relatieve spanningsswing} is de verhouding van spanningsswing en de
+bronspanning. De formule is:
+
+\begin{equation}
+U_{SWING} = U_{O,max} - U_{O,min}\quad\qquad\text{en}\quad\qquad\dfrac{U_{SWING}}{U_B}=\dfrac{U_{O,max} - U_{O,min}}{U_B}
+\end{equation}
+
+We willen graag de $U_{SWING}$ maximaliseren en bepalen hiervoor de optimale waarde van $R_S$. De relatieve spanningsswing $Z$ kan berekend worden door:
+
+\begin{equation}
+Z = \dfrac{U_{SWING}}{U_B}=\dfrac{U_{O,max} - U_{O,min}}{U_B} = \dfrac{R_S}{R_K+R_S}-\dfrac{R_S}{R_G+R_S}
+\end{equation}
+
+Deze functie levert hopelijk ergens een maximum waarde op, waarbij $R_S$ een
+functie is $R_K$ en $R_G$. De wiskunde vertelt ons dat we de afgeleide van
+functie $Z$ naar $R_S$ moeten bepalen en deze afgeleide gelijk aan $0$ stellen:
+
+\begin{equation}
+\dfrac{\text{d} Z(R_S)}{\text{d} R_S} = 0
+\end{equation}
+
+Na enig rekenwerk  blijkt er inderdaad een optimum te zijn\footnote{De lezer wordt
+uitgedaagd dit rekenwerk te controleren}:
+
+\begin{equation}
+R_{S,opt} = R_{opt} = \sqrt{R_G\cdot R_K}
+\end{equation}
+
+Dit wordt het meetkundige gemiddelde van $R_K$ en $R_G$ genoemd. We kunnen
+nu de $U_{O,min}$ en $U_{O,max}$ uitrekenen bij optimale waarde voor $R_S$:
+
+\begin{equation}
+\dfrac{U_{O,min}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_G + \sqrt{R_G\cdot R_K}}
+\qquad\text{en}\qquad
+\dfrac{U_{O,max}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_K + \sqrt{R_G\cdot R_K}}
+\end{equation}
+
+Deze functies zien er niet handig uit. Daarom introduceren we een hulpvariabele
+$\epsilon$ (epsilon) met de volgende definitie:
+
+\begin{equation}
+R_K = \epsilon\cdot R_G \qquad\text{of}\qquad \epsilon=\dfrac{R_K}{R_G}
+\qquad\quad\text{(met } 0<\epsilon <1)
+\end{equation}
+
+Nu wordt:
+
+\begin{equation}
+\dfrac{U_{O,min}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_G + \sqrt{R_G\cdot R_K}}
+                       = \dfrac{\sqrt{\epsilon\cdot R_G\cdot R_G}}{R_G+\sqrt{\epsilon\cdot R_G\cdot R_G}}
+                       = \dfrac{R_G\cdot\sqrt{\epsilon}}{R_G+R_G\cdot\sqrt{\epsilon}}
+                       = \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}}
+%%\qquad\text{en}\qquad
+%%\dfrac{U_{O,max}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_K + \sqrt{R_G\cdot R_K}}
+\end{equation}
+
+en
+
+\begin{equation}
+\dfrac{U_{O,max}}{U_B} = \dfrac{1}{1+\sqrt{\epsilon}}
+\end{equation}
+
+De relatieve spanningsswing is nu:
+\begin{equation}
+Z =
+%\dfrac{U_{O,max}}{U_B} - \dfrac{U_{O,min}}{U_B} = 
+\dfrac{U_{O,max}-U_{O,min}}{U_B} =
+\dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}} - \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}} =
+\dfrac{1 - \sqrt{\epsilon}}{1+\sqrt{\epsilon}}
+\end{equation}
+In figuur~\ref{fig:ntc_graph1} is een grafiek gegeven met daarin de belangrijkste
+parameters en hoe zij zich tot elkaar verhouden.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.63]{drawings/ntc_graph1}
+\caption{Verloop van de uitgangsspanning als functie van de weerstandswaarde van de NTC.}
+\label{fig:ntc_graph1}
+\end{figure}
+
+\section{Diverse Z-functies}
+In figuur~\ref{fig:spanningsswings} van diverse $Z$-functies gegeven. Hierbij is
+de algemene vorm:
+\begin{equation}
+Z(R_S) = \dfrac{R_S}{\dfrac{1}{n}+R_S} - \dfrac{R_S}{n+R_S}
+\end{equation}
+met
+\begin{equation}
+R_K = \dfrac{1}{n}\quad\text{en}\quad R_G = n \qquad\longrightarrow\qquad
+R_{opt} = \sqrt{\dfrac{1}{n}\cdot n} = 1
+\end{equation}
+voor $n$ = 2, 3, 4, 10. Het voordeel hiervan is dat $R_{opt}$ nu altijd 1 is
+(\textsl{genormaliseerd}).
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=1]{gnuplot/spanningsswings}
+\caption{Verloop van de $Z$-functie bij verschillende waarden van $n$.}
+\label{fig:spanningsswings}
+\end{figure}
+ 
+Geel: $n$ = 2, paars: $n $= 3, groen: $n$ = 4, rood: $n$ = 10. Goed is te zien
+dat alle functies dezelfde vorm hebben. Naar mate $n$ groter wordt, neemt de
+spanningsswing toe. Dit is logisch wat een grote $n$ betekent dat $R_K$ en $R_G$
+verder uit elkaar liggen.
 
 
 \section{Bepalen van de temperatuur}
@@ -641,141 +864,27 @@ Met de aangepaste B-parameter-vergelijking:
 \end{equation}
 Hierin zijn $A$ en $B$ bekende constanten, $\ln A$ is dus ook een constante.
 
-Het is meestal niet mogelijk om direct de weerstandswaarde te gebruiken maar
-wel een afgeleide spanning daarvan. Met behulp van een spanningsdeler is deze
-spanning te op te wekken. Veel microcontrollers hebben een ADC aan boord die
-een analoge spanning kan verwerken tussen 0 V en de voedingsspanning. Met
-behulp van software kan de temperatuur dan berekend worden.
-
-In figuur~\ref{fig:ntc_voltagediv} is de spanningsdeler te zien. Merk op dat
-de NTC bovenin is geplaatst.
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale=0.63]{drawings/ntc_voltagediv}
-\caption{Eenvoudige spanningsdeler.}
-\label{fig:ntc_voltagediv}
-\end{figure}
-
-De overdracht van de spanningsdeler is:
-
-\begin{equation}
-U_O = \dfrac{R_S}{\rntc + R_S}\cdot U_B \qquad\qquad\text{of}\qquad\qquad \dfrac{U_O}{U_B}=\dfrac{R_S}{\rntc + R_S}
-\end{equation}
-
-We kunnen nu iets zeggen over de serieweerstand $R_S$. Als deze weerstandswaarde
-veel groter is dan $\rntc$, dan ligt de uitgangsspanning $U_O$ dicht tegen de
-voedingsspanning aan en varieert niet zo veel bij verandering van de waarde van
-de NTC. Is $R_S$ veel kleiner dan $\rntc$, dan ligt de uitgangsspanning tegen
-de referentiespanning aan en varieert niet zo veel.
-
-Natuurlijk willen we de verandering van de uitgangsspanning ten gevolge van een
-verandering van $\rntc$ zo groot mogelijk hebben. We beschouwen alleen het
-temperatuurbereik tussen $T_{laag}$ en $T_{hoog}$; hierbij horen resp.\@ de
-weerstandswaarden $R_\text{NTC,groot} = R_G$ en $R_\text{NTC,klein} = R_K$.
-De waarde van de NTC varieert dus tussen $R_K$ en $R_G$. Het is eenvoudig in
-te zien dat $U_O$ maximaal is bij $\rntc = R_K$ (de noemer heeft nu de kleinst
-mogelijke waarde) en $U_O$ minimaal bij $\rntc = R_G$ (de noemer heeft nu de
-grootst mogelijke waarde)
-
-We introduceren een nieuwe term: \textsl{spanningsswing}. De spanningsswing is
-het verschil tussen de maximale uitgangsspanning en de minimale uitgangsspanning.
-De \textsl{relatieve spanningsswing} is de verhouding van spanningsswing en de
-bronspanning. De formule is:
-
-\begin{equation}
-U_{SWING} = U_{O,max} - U_{O,min}\quad\qquad\text{en}\quad\qquad\dfrac{U_{SWING}}{U_O}=\dfrac{U_{O,max} - U_{O,min}}{U_B}
-\end{equation}
-
-We willen graag de $U_{SWING}$ maximaliseren en bepalen hiervoor de optimale waarde van $R_S$. De relatieve spanningsswing kan berekend worden door:
-
-\begin{equation}
-Z(R_S) = \dfrac{U_{SWING}}{U_O}=\dfrac{U_{O,max} - U_{O,min}}{U_B} = \dfrac{R_S}{R_K+R_S}-\dfrac{R_S}{R_G+R_S}
-\end{equation}
-
-Deze functie levert hopelijk ergens een maximum waarde op, waarbij $R_S$ een
-functie is $R_K$ en $R_G$. De wiskunde vertelt ons dat we de afgeleide van
-functie $Z(R_S)$ naar $R_S$ moeten bepalen en deze afgeleide gelijk aan $0$ stellen:
-
-\begin{equation}
-\dfrac{\text{d} Z(R_S)}{\text{d} R_S} = 0
-\end{equation}
-
-Na enig rekenwerk  blijkt er inderdaad een optimum te zijn\footnote{De lezer wordt
-uitgedaagd dit rekenwerk te controleren}:
-
-\begin{equation}
-R_{S,opt} = R_{opt} = \sqrt{R_G\cdot R_K}
-\end{equation}
-
-Dit wordt het meetkundige gemiddelde van $R_K$ en $R_G$ genoemd. We kunnen
-nu de $U_{O,min}$ en $U_{O,max}$ uitrekenen bij optimale waarde voor $R_S$:
-
-\begin{equation}
-\dfrac{U_{O,min}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_G + \sqrt{R_G\cdot R_K}}
-\qquad\text{en}\qquad
-\dfrac{U_{O,max}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_K + \sqrt{R_G\cdot R_K}}
-\end{equation}
-
-Deze functies zien er niet handig uit. Daarom introduceren we een hulpvariabele
-$\epsilon$ (epsilon) met de volgende definitie:
-
-\begin{equation}
-R_K = \epsilon\cdot R_G \qquad\qquad\text{of}\qquad\qquad \epsilon=\dfrac{R_K}{R_G}
-\end{equation}
-
-Nu wordt:
-
-\begin{equation}
-\dfrac{U_{O,min}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_G + \sqrt{R_G\cdot R_K}}
-                       = \dfrac{\sqrt{\epsilon\cdot R_G\cdot R_G}}{R_G+\sqrt{\epsilon\cdot R_G\cdot R_G}}
-                       = \dfrac{R_G\cdot\sqrt{\epsilon}}{R_G+R_G\cdot\sqrt{\epsilon}}
-                       = \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}}
-%%\qquad\text{en}\qquad
-%%\dfrac{U_{O,max}}{U_B} = \dfrac{\sqrt{R_G\cdot R_K}}{R_K + \sqrt{R_G\cdot R_K}}
-\end{equation}
-
-en
-
-\begin{equation}
-\dfrac{U_{O,max}}{U_B} = \dfrac{1}{1+\sqrt{\epsilon}}
-\end{equation}
-
-De relatieve spanningsswing is nu:
-\begin{equation}
-\dfrac{U_{O,max}}{U_B} - \dfrac{U_{O,min}}{U_B} = \dfrac{U_{O,max-U_{O,min}}}{U_B} =
-\dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}} - \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}} =
-\dfrac{1 - \sqrt{\epsilon}}{1+\sqrt{\epsilon}}
-\end{equation}
-In figuur~\ref{fig:ntc_graph1} is een grafiek gegeven met daarin de belangrijkste
-parameters en hoe zij zich tot elkaar verhouden.
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale=0.63]{drawings/ntc_graph1}
-\caption{Verloop van de uitgangsspanning als functie van de weerstandswaarde van de NTC.}
-\label{fig:ntc_graph1}
-\end{figure}
 
 
 
-
-
-
-
-\subsubsection*{Voorbeeld}
+\section{Voorbeeld}
 We willen de temperatuur meten tussen \mathcelc{0} en \mathcelc{30}. In
 tabel~\ref{tab:specsntc} zoeken we de bijbehorende weerstandswaarde de de NTC
 kan aannemen: $R_G=32.650\ \Omega$ bij \mathcelc{0} en $R_K= 8.056\ \Omega$
-bij \mathcelc{30}. We de kunnen nu de optimale serieweerstand uitrekenen:
+(afgerond) bij \mathcelc{30}. We de kunnen nu de optimale serieweerstand uitrekenen:
+
 \begin{equation}
 R_{opt} = \sqrt{R_K\cdot R_G} = \sqrt{8056\cdot32650} = 16218\ \Omega
 \end{equation}
+
 De verhouding $\epsilon$ is: 
+
 \begin{equation}
 \epsilon = \sqrt{\dfrac{R_K}{R_G}} = \dfrac{8056}{32650} = 0,2467
 \end{equation}
+
 De minimale en maximale spanningen zijn:
+
 \begin{equation}
 U_{O,min} = \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\cdot U_B =
           = \dfrac{0,4967}{1+0,4967}\cdot U_B = 0,3319\cdot U_B
@@ -784,11 +893,45 @@ U_{O,min} = \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\cdot U_B =
 U_{O,max} = \dfrac{1}{1+\sqrt{\epsilon}}\cdot U_B =
           = \dfrac{1}{1+0,4967}\cdot U_B = 0,6681\cdot U_B
 \end{equation}
+
 De spanningsswing is:
+
 \begin{equation}
 U_{SWING} = \dfrac{1-\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\cdot U_B =
           = \dfrac{1-0,4967}{1+0,4967}\cdot U_B = 0,3362\cdot U_B
 \end{equation}
+
+We nemen als bronspanning $U_B=5$ V. Stel dat $U_0 = 2,1$ V. Dan is
+
+\begin{equation}
+\rntc = \dfrac{U_B-U_0}{U_0}\cdot R_S = \dfrac{5,0-2,1}{2,1}\cdot 16218 = 22396\ \Omega
+\end{equation}
+
+We berekenen de temperatuur met behulp van de aangepaste B-parameter vergelijking:
+
+\begin{equation}
+T = \dfrac{B}{\ln \rntc - \ln A} = \dfrac{3892,2}{10,0167+3,8807} = 280,17
+\end{equation}
+
+Dit is de temperatuur in Kelvin, omrekenen naar graden Celcius:
+
+\begin{equation}
+T_{Celcius} = T - 273,15 = 280,17 - 273,15 = 6,92\ ^\circ\text{C}
+\end{equation}
+
+De overdrachtsfunctie van de spanningsdeler als functie van de temperatuur is:
+\begin{equation}
+H(T) = \dfrac{R_{}opt}{\rntc + R_{opt}}=\dfrac{R_{opt}}{A\cdot\text{e}^{\,(B/T)}+R_{opt}}
+\end{equation}
+De overdrachtsfunctie is te zien in figuur~\ref{fig:transferfunctionz}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=1]{gnuplot/transferfunctionz}
+\caption[Overdracht van de spanningsdeler als functie van de temperatuur]{Overdracht van de spanningsdeler als functie van de temperatuur. Noot:
+de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
+\label{fig:transferfunctionz}
+\end{figure}
 
 
 
@@ -1000,18 +1143,84 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 \end{longtable}
 \end{ThreePartTable}
 
-
 \clearpage
 \section{abc}
 \label{app:ntc_shh_kelvin}
-\lstinputlisting[linerange={1-34},caption=hallo,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
-
+\lstinputlisting[caption=hallo,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
+\newpage
 \label{app:ntc_shh_straightline_beta}
-\lstinputlisting[linerange={1-34},caption=hallo,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
+\lstinputlisting[caption=hallo,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
+\newpage
+\label{app:ntc_shh_straightline_adapt}
+\lstinputlisting[caption=hallo,label=cod:ntc_shh_straightline_adapt]{gnuplot/ntc_shh_straightline_adapt.plt}
 
-\label{app:ntc_shh_straightline}
-\lstinputlisting[linerange={1-34},caption=hallo,label=cod:ntc_shh_straightline]{gnuplot/ntc_shh_straightline.plt}
 
+\clearpage
+\section{Afleiding optimale serieweerstand}
+\addtolength{\jot}{0.8ex}
+De functie:
+
+\begin{equation}
+Z(R_S) = \dfrac{R_S}{R_K+R_S}-\dfrac{R_S}{R_G+R_S}
+\end{equation}
+
+Eerst gelijknamig maken:
+
+\begin{equation}
+\begin{split}
+Z(R_S) &= \dfrac{R_S\cdot(R_G+R_S)-R_S\cdot(R_K+R_S)}{(R_K+R_S)\cdotw(R_G+R_S)} \\
+       &= \dfrac{R_S\cdot R_G - R_S\cdot R_K}{(R_K+R_S)\cdotw(R_G+R_S)}
+\end{split}
+\end{equation}
+
+We maken gebruik van de quoti\"entregel:
+
+\begin{equation}
+f = \dfrac{g}{h} \quad \rightarrow \quad f' = \dfrac{f'g-fg'}{g^2}
+\end{equation}
+
+Dus:
+
+\begin{equation}
+\begin{split}
+\dfrac{\text{d} Z(R_S)}{\text{d} R_S} &= 
+\dfrac{(R_G-R_K)\cdot(R_K+R_S)\cdot(R_G+R_S) - (R_S\cdot R_G - R_S\cdot R_K)\cdot(R_G+R_K+2R_S)}{N} \\
+&= \dfrac{(R_G-R_K)\cdot(R_K+R_S)\cdot(R_G+R_S) - R_S\cdot(R_G - R_K)\cdot(R_G+R_K+2R_S)}{N} \\
+&= \dfrac{(R_K+R_S)\cdot(R_G+R_S) - R_S\cdot(R_G+R_K+2R_S)}{N} \\
+&= \dfrac{R_K\cdot R_G + R_K\cdot R_S + R_G\cdot R_S + R_S^2 - R_G\cdot R_S - R_K\cdot R_S -2R_S^2}{N} \\
+&= \dfrac{R_K\cdot R_G - R_S^2}{N}
+\end{split}
+\end{equation}
+met
+\begin{equation}
+N = \left((R_K+R_S)\cdotw(R_G+R_S)\right)^2
+\end{equation}
+
+We stellen de afgeleide gelijk aan 0 om de extreme te bepalen. Dat houdt in dat
+de teller 0 moet zijn en de noemer ongelijk aan 0 moet zijn. Aangezien alle
+weerstandswaarden groter dan 0 zijn, wordt aan de tweede voorwaarde automatisch
+voldaan. We bekijken dus alleen de noemer:
+
+\begin{equation}
+\dfrac{\text{d} Z(R_S)}{\text{d} R_S} = 0 \quad\rightarrow\quad  R_K\cdot R_G - R_S^2 = 0
+\quad\rightarrow\quad R_S^2 = R_K\cdot R_G
+\end{equation}
+
+Voor $R_S$ volgt:
+
+\begin{equation}
+R_S = \sqrt{R_K\cdot R_G} \qquad\text{en}\qquad R_S = -\sqrt{R_K\cdot R_G}
+\end{equation}
+
+Dit zijn de optimale waarden van $R_S$. Alleen de linker oplossing heeft fysieke
+betekenis, dus:
+
+\begin{equation}
+\setlength\fboxsep{2ex}
+\boxed{R_{opt} = \sqrt{R_K\cdot R_G}}
+\end{equation}
+
+want we zoeken naar een optimale waarde van $R_S$.
 
 \newpage
 % Add bibliography to toc with clickable reference
