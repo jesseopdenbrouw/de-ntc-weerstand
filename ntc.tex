@@ -310,23 +310,39 @@ magnesium, nikkel, ijzer en uranium~\cite{bakshi2009basic}. De elektrische
 eigenschappen komen voort uit de het specifieke mengsel en de fysieke grootte
 en vorm van de NTC.
 
-
-
-
+\begin{figure}[ht!]
+\begin{subfigure}[c]{0.48\textwidth}
+\centering
+\includegraphics[scale=0.25]{pics/thermistor1}\hspace*{1cm}
+\includegraphics[scale=0.25]{pics/thermistor2}
+\caption[Een NTC]{Twee verschijningsvormen van een NTC.}
+\label{fig:thermistor1}
+\end{subfigure}
+\begin{subfigure}[c]{0.48\textwidth}
+\centering
+\includegraphics[scale=0.63]{drawings/ntc_symbol_meas}
+\caption[Een NTC]{Symbool en meetschema.}
+\label{fig:ntc_symbol_meas}
+\end{subfigure}
+\caption{Verschijningsvormen, symbool en meetschema.}
+\label{fig:ntcpics}
+\end{figure}%
 
 In dit document wordt gebruik gemaakt van de NTC \ntctype{} van
 \ntcman~\cite{betatherm10K3A542i}. Dit is een NTC met een meetbereik van
 \mathcelc{-40} tot \mathcelc{+118}. In figuur~\ref{fig:ntc_ntc_plot_celsius_fig} is
-de weerstand in Ohm uitgezet tegen de temperatuur in graden Celsius. Het is goed
-te zien dat het verloop niet-lineair is. De gegevens
-zijn te vinden in tabel~\ref{tab:specsntc} op pagina~\pageref{tab:specsntc}.
-
+de weerstand in Ohm uitgezet tegen de temperatuur in graden Celsius.
+%
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=\figscale]{gnuplot/ntc_ntc_plot_celsius_fig}
 \caption[Weerstand-temperatuur karakteristiek van de NTC]{Weerstand-temperatuur karakteristiek van de NTC (temperatuur in graden Celsius).}
 \label{fig:ntc_ntc_plot_celsius_fig}
 \end{figure}
+%
+Het is goed te zien dat het verloop niet-lineair is. De gegevens
+zijn te vinden in tabel~\ref{tab:specsntc} op pagina~\pageref{tab:specsntc}.
+
 
 Noot: in alle wiskundige vergelijkingen wordt de temperatuur in Kelvin
 gegeven tenzij anders is vermeld.
@@ -729,6 +745,53 @@ We kunnen nu $\rntc$ expliciet maken:
 
 Door de uitgangsspanning te meten is $\rntc$ te berekenen.
 
+\subsection{Overdrachtskarakteristieken van de spanningsdeler}
+Voor de overdrachtskarakteristiek maken we gebruik van de aangepaste exponenti\"ele
+B-parameter vergelijking --- de weerstand bepalen met de Steinhart-Hart-vergelijking
+levert veel rekenwerk op.
+De overdrachtsfunctie van de spanningsdeler als functie van de temperatuur is:
+
+\begin{equation}
+\label{equ:transferh}
+H(T) = \dfrac{R_S}{\rntc + R_S}=\dfrac{R_S}{A\cdot\text{e}^{\,(B/T)}+R_S}
+\end{equation}
+
+De overdrachtsfunctie is te zien in figuur~\ref{fig:transferfunctionz}. De
+gebruikte waarden zijn: $R_S = 16218\ \Omega$, $B = 3892,2$ K en
+$A = 0,020637035\ \Omega$. Zie  ook hoofdstuk~\ref{sec:voorbeeld}.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=1]{gnuplot/transferfunctionz}
+\caption[Overdracht van de spanningsdeler als functie van de temperatuur]{Overdracht van de spanningsdeler als functie van de temperatuur. Noot:
+de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
+\label{fig:transferfunctionz}
+\end{figure}
+
+Om de temperatuur te berekenen als functie van de overdracht werken we de
+vergelijking in~\eqref{equ:transferh} om:
+
+\begin{equation}
+\label{equ:transferT}
+T = \dfrac{B}{\ln (R_s - H\cdot R_S) - \ln (H\cdot A)}
+\end{equation}
+
+In figuur~\ref{fig:transferfunctionT} is de karakteristiek te zien. Merk op
+dat $H$ niet 0 of 1 kan zijn, omdat de noemer van~\eqref{equ:transferT} dan
+onbepaald is.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=1]{gnuplot/transferfunctionT}
+\caption[Grafiek van de temperatuur als functie van de overdracht]{Grafiek van de temperatuur als functie van de overdracht. Noot:
+de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
+\label{fig:transferfunctionT}
+\end{figure}
+
+
+
+
+
 \subsection{De optimale waarde van de serieweerstand}
 We kunnen nu iets zeggen over de serieweerstand $R_S$. Als deze weerstandswaarde
 veel groter is dan $\rntc$, dan ligt de uitgangsspanning $U_O$ dicht tegen de
@@ -989,6 +1052,7 @@ Hierin zijn $A$ en $B$ bekende constanten, $\ln A$ is dus ook een constante.
 
 \clearpage
 \section{Voorbeeld}
+\label{sec:voorbeeld}
 We willen de temperatuur meten tussen \mathcelc{0} en \mathcelc{30}. We gaan in
 eerste instantie uit van de spanningsdeler in figuur~\ref{fig:ntc_voltagediv}.
 We nemen als bronspanning $U_B=5$ V. In
@@ -1044,20 +1108,6 @@ Dit is de temperatuur in Kelvin, omrekenen naar graden Celcius:
 \begin{equation}
 T_{Celcius} = T - 273,15 = 280,17 - 273,15 = 6,92\ ^\circ\text{C}
 \end{equation}
-
-De overdrachtsfunctie van de spanningsdeler als functie van de temperatuur is:
-\begin{equation}
-H(T) = \dfrac{\ropt}{\rntc + \ropt}=\dfrac{\ropt}{A\cdot\text{e}^{\,(B/T)}+\ropt}
-\end{equation}
-De overdrachtsfunctie is te zien in figuur~\ref{fig:transferfunctionz}.
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale=1]{gnuplot/transferfunctionz}
-\caption[Overdracht van de spanningsdeler als functie van de temperatuur]{Overdracht van de spanningsdeler als functie van de temperatuur. Noot:
-de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
-\label{fig:transferfunctionz}
-\end{figure}
 
 De versterking $A_{IA}$ van de instrumentatieversterker is:
 
@@ -1289,7 +1339,7 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 \end{ThreePartTable}
 
 \clearpage
-\section{abc}
+\section{Listings van Gnuplot-scripts}
 \label{app:ntc_shh_kelvin}
 \lstinputlisting[caption=hallo,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
 \newpage
