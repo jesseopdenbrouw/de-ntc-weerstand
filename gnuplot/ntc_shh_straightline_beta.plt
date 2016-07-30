@@ -34,7 +34,8 @@ set xlabel "1/T [K^-^1]" # offset 0,-1
 set ylabel "ln R_n_t_c [ln {/Symbol W}]" # offset -1
 plot straightline_beta(x) title "" lc "blue" with lines, "GegevensBetatherm10K3A542I.dat" using 3:4 with points pt 7 ps 0.2 lc "red" title "" 
 
-# Output the parameters to an TeX file.
+# Create LaTeX file with parameters
+set decimalsign locale
 set print "ntc_shh_straightline_beta_curve_fitting_params.tex"
 print "% Curve fitting parameters for fitting straight line"
 print "% ln Rntc = B*x + log(R0) - B/T0"

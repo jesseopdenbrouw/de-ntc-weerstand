@@ -26,6 +26,7 @@ fit shh_curve_fit(x) "GegevensBetatherm10K3A542I.dat" using 2:5 via C,B,A
 
 ### Caculcate some ...
 SSE=FIT_WSSR/(FIT_NDF)
+
 SSR=SST-SSE
 R2=SSR/SST
 

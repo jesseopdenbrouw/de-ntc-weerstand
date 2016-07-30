@@ -6,6 +6,7 @@ unset log                              # remove any log-scaling
 unset label                            # remove any previous labels
 set xtic auto                          # set xtics automatically
 set ytic auto                          # set ytics automatically
+set decimalsign locale
 
 # Set terminal type
 set terminal pdfcairo

@@ -16,7 +16,6 @@ mean(x)= m
 fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 1:2 via m # 1 is the x axis and 2 is the y axis
 SST = FIT_WSSR/(FIT_NDF+1)
 
-# The cubic function to fit
 beta(x) = A*x**3 + B*x**2 + C*x + D
 fit beta(x) "GegevensBetatherm10K3A542I.dat" using 1:7 via A,B,C,D
 
