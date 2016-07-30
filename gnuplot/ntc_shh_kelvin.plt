@@ -30,6 +30,10 @@ SSR=SST-SSE
 R2=SSR/SST
 
 # Do the plot
+#set xrange [-50:130]
+#set yrange [3700:4050]
+set xlabel "R_n_t_c [{/Symbol W}]" # offset 0,-1
+set ylabel "T [K]" # offset -1
 plot shh_curve_fit(x) title "" with lines lc "blue", "GegevensBetatherm10K3A542I.dat" using 2:5 with points pt 7 ps 0.2 lc "red" title ""
 
 # Create LaTeX file with parameters
