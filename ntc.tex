@@ -19,6 +19,12 @@
 \pdfminorversion=5
 \pdfobjcompresslevel=2
 
+%% Use the Latin Modern font...
+%% https://www.ctan.org/tex-archive/fonts/lm
+%%\usepackage{lmodern}
+\usepackage{charter}
+\usepackage[bitstream-charter]{mathdesign}
+
 %https://www.ctan.org/pkg/inputenc
 %% Set input encoding to ISO-8859-1 (latin1)
 \usepackage[utf8]{inputenc}
@@ -50,8 +56,8 @@
 %% Use the AMS Mathematical typesetting
 %% http://ctan.cs.uu.nl/macros/latex/contrib/mathtools/mathtools.pdf
 \usepackage{mathtools}
-\usepackage{amsfonts}
-\usepackage{amssymb}
+%%\usepackage{amsfonts}
+%%\usepackage{amssymb}
 \setlength{\mathindent}{1em}
 \DeclareMathSymbol{,}{\mathord}{letters}{"3B}
 % Extra linespacing in multilined equations
@@ -60,10 +66,6 @@
 %% Define and use colors
 %% http://ctan.cs.uu.nl/macros/latex/contrib/xcolor/xcolor.pdf
 \usepackage{xcolor}
-
-%% Use the Latin Modern font...
-%% https://www.ctan.org/tex-archive/fonts/lm
-\usepackage{lmodern}
 
 %% Subliminal refinements towards typographical perfection
 %% http://ctan.cs.uu.nl/macros/latex/contrib/microtype/microtype.pdf
@@ -743,7 +745,7 @@ We kunnen nu $\rntc$ expliciet maken:
 \rntc = \dfrac{U_B-U_0}{U_0}\cdot R_S
 \end{equation}
 
-Door de uitgangsspanning te meten is $\rntc$ te berekenen.
+Door de uitgangsspanning $U_O$ te meten is $\rntc$ te berekenen.
 
 \subsection{Overdrachtskarakteristieken van de spanningsdeler}
 Voor de overdrachtskarakteristiek maken we gebruik van de aangepaste exponenti\"ele
@@ -1058,7 +1060,7 @@ eerste instantie uit van de spanningsdeler in figuur~\ref{fig:ntc_voltagediv}.
 We nemen als bronspanning $U_B=5$ V. In
 tabel~\ref{tab:specsntc} zoeken we de bijbehorende weerstandswaarde de de NTC
 kan aannemen: $R_G=32.650\ \Omega$ bij \mathcelc{0} en $R_K= 8.056\ \Omega$
-(afgerond) bij \mathcelc{30}. We de kunnen nu de optimale serieweerstand uitrekenen:
+(afgerond) bij \mathcelc{30}. We kunnen nu de optimale serieweerstand uitrekenen:
 
 \begin{equation}
 \ropt = \sqrt{R_K\cdot R_G} = \sqrt{8056\cdot32650} = 16218\ \Omega
@@ -1127,7 +1129,7 @@ Dat is ongeveer 0,4 mW. De maximale temperatuurstijging $T_{self}$ als gevolg va
  zelfverwarming is:
  
 \begin{equation}
-T_{self} = \dfrac{P_{ntc.max}}{K} = \dfrac{0,4}{2}=0,2\ ^\circ\text{C}
+T_{self} = \dfrac{P_{ntc.max}}{K} = \dfrac{0,4\cdot10^{-3}}{2\cdot10^{-3}}=0,2\ ^\circ\text{C}
 \end{equation}
 
 %%%
@@ -1158,18 +1160,13 @@ T_{self} = \dfrac{P_{ntc.max}}{K} = \dfrac{0,4}{2}=0,2\ ^\circ\text{C}
 \section{Gegevenstabel NTC}
 
 \begin{ThreePartTable}
-\begin{TableNotes}
-\footnotesize
-\item [a] de waarden in kolom $B$ zijn berekend met behulp van vergelijking~\eqref{equ:betaexplicit}.
-Bij $T=\mathcelc{25}$ is $B$ niet te berekenen.
-\end{TableNotes}
 \begin{longtable}{rrrrrrr}
 \caption{Gegevenstabel van de NTC \ntctype. Kolom 1 en 2 zijn gegevens van \ntcman, de
 overige gegevens zijn berekend.}\label{tab:specsntc} \\
-$T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\frac{\rntc}{R_0}$ & $B$ \\[0.3ex]
+$T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\frac{\rntc}{R_0}$ & $B$\tnote{a} \\[0.3ex]
 \hline \\[-2.0ex]
 \endfirsthead
-$T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\frac{\rntc}{R_0}$ & $B$ \\[0.3ex]
+$T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\frac{\rntc}{R_0}$ & $B$\tnote{a} \\[0.3ex]
 \hline \\[-2.0ex]
 \endhead
 \hline \multicolumn{7}{r}{\small\sl{vervolg op de volgende pagina}}
@@ -1241,7 +1238,7 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 22           & 11420,02  & 0,00338811    & 9,34312323  & 295,15     & 0,13       & 3894,92 \\
 23           & 10922,73  & 0,00337667    & 9,29860122  & 296,15     & 0,09       & 3896,59 \\
 24           & 10449,83  & 0,00336530    & 9,25434099  & 297,15     & 0,04       & 3898,25 \\
-\textsl{25}           & \textsl{10000,00}  & \textsl{0,00335402}    & \textsl{9,21034037}  & \textsl{298,15}     & \textsl{0,00}       &   ---\tnote{}\ \ \ \ \     \\
+\textsl{25}           & \textsl{10000,00}  & \textsl{0,00335402}    & \textsl{9,21034037}  & \textsl{298,15}     & \textsl{0,00}       &   ---\tnote{b}\ \ \ \ \     \\
 26           & 9572,00   & 0,00334280    & 9,16659745  & 299,15     & -0,04      & 3901,50 \\
 27           & 9164,66   & 0,00333167    & 9,12311006  & 300,15     & -0,09      & 3903,11 \\
 28           & 8776,88   & 0,00332060    & 9,07987627  & 301,15     & -0,13      & 3904,70 \\
@@ -1336,6 +1333,11 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 117          & 420,43    & 0,00256312    & 6,04127800  & 390,15     & -3,17      & 4006,91 \\
 118          & 409,27    & 0,00255656    & 6,01437508  & 391,15     & -3,20      & 4007,72 \\
 \end{longtable}
+\begin{tablenotes}
+\footnotesize
+\item [a] De waarden in kolom $B$ zijn berekend met behulp van vergelijking~\eqref{equ:betaexplicit}.
+\item [b] Bij $T=\mathcelc{25}$ is $B$ niet te berekenen.
+\end{tablenotes}
 \end{ThreePartTable}
 
 \clearpage
