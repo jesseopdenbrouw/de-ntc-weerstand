@@ -13,7 +13,7 @@ set output "ntc_beta_kelvin_fig.pdf"
 
 ### Calculate mean to set some gnuplot internals
 mean(x)= m
-fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 5:7 via m # 1 is the x axis and 2 is the y axis
+fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 5:7 via m
 SST = FIT_WSSR/(FIT_NDF+1)
 
 # The cubic function to fit
@@ -37,12 +37,12 @@ set decimalsign locale
 set print "ntc_beta_kelvin_curve_fitting_params.tex"
 print "% Curve fitting parameters for fitting beta plot in Kelvin"
 print "% Beta = A*x^3 + B*x^2 + C*x + D"
-print sprintf("\\newcommand{\\ntcbetakelvinA}{%.10f}", A)
-print sprintf("\\newcommand{\\ntcbetakelvinB}{%.10f}", B)
-print sprintf("\\newcommand{\\ntcbetakelvinC}{%.10f}", C)
-print sprintf("\\newcommand{\\ntcbetakelvinD}{%.10f}", D)
-print sprintf("\\newcommand{\\ntcbetakelvinRsqr}{%.10f}", R2)
-print sprintf("\\newcommand{\\ntcbetakelvintwofive}{%.10f}", beta(273.15+25.0))
+print sprintf("\\newcommand{\\ntcbetakelvinA}{$").gprintf("%t", A).sprintf("\\cdot 10^{").gprintf("%T", A).sprintf("}$}")
+print sprintf("\\newcommand{\\ntcbetakelvinB}{$").gprintf("%t", B).sprintf("\\cdot 10^{").gprintf("%T", B).sprintf("}$}")
+print sprintf("\\newcommand{\\ntcbetakelvinC}{%f}", C)
+print sprintf("\\newcommand{\\ntcbetakelvinD}{%f}", D)
+print sprintf("\\newcommand{\\ntcbetakelvinRsqr}{%f}", R2)
+print sprintf("\\newcommand{\\ntcbetakelvintwofive}{%f}", beta(273.15+25.0))
 print sprintf("\\newcommand{\\ntcbetakelvintwofiveonedec}{%.1f}", beta(273.15+25.0))
 print sprintf("\\newcommand{\\ntcbetakelvintwofiveint}{%d}", beta(273.15+25.0)+0.5)
 

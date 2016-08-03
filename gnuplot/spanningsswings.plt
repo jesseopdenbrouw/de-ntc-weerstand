@@ -23,10 +23,6 @@ set xrange [0:5]
 #set yrange [3700:4050]
 set xlabel "R [{/Symbol W}]" # offset -1
 set ylabel "Z [-]" # offset 0,-1
-#plot z2(x)z3(x) title "" lc "blue" with lines 
-#plot for [i=1:10] z(x,i) notitle lc i with lines 
-#plot for [i in "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20"] z(x,i) notitle lc i+5 with lines 
-#plot for [i in "2 3 4 10"] z(x,i) notitle lc i with lines 
 plot z(x,2) notitle lc 5 with lines, z(x,3) notitle lc 6 with lines, z(x,3) notitle lc 9 with lines, z(x,4) notitle lc 10 with lines, z(x,10) notitle lc 15 with lines 
  
 set output

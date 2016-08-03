@@ -13,7 +13,7 @@ set output "ntc_beta_celsius_fig.pdf"
 
 ### Calculate mean to set some gnuplot internals
 mean(x)= m
-fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 1:2 via m # 1 is the x axis and 2 is the y axis
+fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 1:2 via m 
 SST = FIT_WSSR/(FIT_NDF+1)
 
 # The cubic function to fit
@@ -38,11 +38,11 @@ set print "ntc_beta_celcius_curve_fitting_params.tex"
 print "% Curve fitting parameters for fitting beta plot (degree Celsius)"
 #print "% Beta = A*x^3 + B*x^2 + C*x + D"
 print "% Beta = A*x^2 + B*x + C"
-print sprintf("\\newcommand{\\ntcbetacelsiusA}{%.10f}", A)
-print sprintf("\\newcommand{\\ntcbetacelsiusB}{%.10f}", B)
-print sprintf("\\newcommand{\\ntcbetacelsiusC}{%.10f}", C)
-print sprintf("\\newcommand{\\ntcbetacelsiusD}{%.10f}", D)
-print sprintf("\\newcommand{\\ntcbetacelsiusRsqr}{%.10f}", R2)
+print sprintf("\\newcommand{\\ntcbetacelsiusA}{$").gprintf("%t", A).sprintf("\\cdot 10^{").gprintf("%T", A).sprintf("}$}")
+print sprintf("\\newcommand{\\ntcbetacelsiusB}{$").gprintf("%t", B).sprintf("\\cdot 10^{").gprintf("%T", B).sprintf("}$}")
+print sprintf("\\newcommand{\\ntcbetacelsiusC}{%f}", C)
+print sprintf("\\newcommand{\\ntcbetacelsiusD}{%f}", D)
+print sprintf("\\newcommand{\\ntcbetacelsiusRsqr}{%f}", R2)
 print sprintf("\\newcommand{\\ntcbetacelsiustwofive}{%.10f}", beta(25.0))
 print sprintf("\\newcommand{\\ntcbetacelsiustwofiveonedec}{%.1f}", beta(25.0))
 print sprintf("\\newcommand{\\ntcbetacelsiustwofiveint}{%d}", beta(25.0)+0.5)

@@ -19,9 +19,6 @@ A    = 0.020637035
 temp(x) = B/(log(Ropt-x*Ropt)-log(x*A))
 
 set xrange [0:1]
-#set trange [280:280]
-#set yrange [3700:4050]
-#set linetype 11 lc rgb 'blue'
 set style line 1  linetype 2 linecolor rgb "blue"  linewidth 0.500 pointtype 2 pointsize default pointinterval 50
 set ylabel "T [K]" # offset -1
 set xlabel "H [-]" # offset 0,-1

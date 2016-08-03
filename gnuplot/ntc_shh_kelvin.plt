@@ -13,7 +13,7 @@ set output "ntc_shh_kelvin_fig.pdf"
 
 ### Calculate mean to set some gnuplot internals
 mean(x)= m
-fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 2:5 via m # 1 is the x axis and 2 is the y axis
+fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 2:5 via m
 SST = FIT_WSSR/(FIT_NDF+1)
 
 # Do a fit using using the Steinhart-Hart beta function:
@@ -41,11 +41,8 @@ set decimalsign locale
 set print "ntc_shh_kelvin_curve_fitting_params.tex"
 print "% Curve fitting parameters for fitting Steinhart-Hart plot in Kelvin"
 print "%1/T = A + B*log(x) + C*log(x)**3"
-print sprintf("%% \\newcommand{\\ntcshhkelvinA}{%.10f}", A)
 print sprintf("\\newcommand{\\ntcshhkelvinA}{$").gprintf("%t", A).sprintf("\\cdot 10^{").gprintf("%T", A).sprintf("}$}")
-print sprintf("%% \\newcommand{\\ntcshhkelvinB}{%.10f}", B)
 print sprintf("\\newcommand{\\ntcshhkelvinB}{$").gprintf("%t", B).sprintf("\\cdot 10^{").gprintf("%T", B).sprintf("}$}")
-print sprintf("%% \\newcommand{\\ntcshhkelvinC}{%.10f}", C)
 print sprintf("\\newcommand{\\ntcshhkelvinC}{$").gprintf("%t", C).sprintf("\\cdot 10^{").gprintf("%T", C).sprintf("}$}")
 print sprintf("\\newcommand{\\ntcshhkelvinRsqr}{%.10f}", R2)
 
