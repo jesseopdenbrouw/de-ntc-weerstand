@@ -301,7 +301,8 @@ NTC wordt gebruikt in analoge schakelingen om bijvoorbeeld iets te schakelen
 bij een bepaalde temperatuur, meestal in combinatie met een Schmitt-trigger.
 In digitale schakelingen wordt de temperatuur berekend met behulp van een
 analoog-digitaal converter (ADC) en software. Denk hierbij bijvoorbeeld aan
-een thermostaat. 
+een intelligente thermostaat. 
+
 \subsection{Constructie en eigenschappen}
 Een NTC is een halfgeleider-weerstand en is erg gevoelig voor kleine variaties
 in temperatuur~\cite{jespersen1982thermal}. Er zijn diverse vormen mogelijk:
@@ -311,6 +312,10 @@ NTC's worden gemaakt van een mengsel van metaaloxiden zoals kobalt, koper,
 magnesium, nikkel, ijzer en uranium~\cite{bakshi2009basic}. De elektrische
 eigenschappen komen voort uit de het specifieke mengsel en de fysieke grootte
 en vorm van de NTC.
+
+In figuur~\ref{fig:thermistor1} is een tweetal NTC's te zien.
+In figuur~\ref{fig:ntc_symbol_meas} is het symbool van de NTC en een eenvoudige
+meetopstelling te zien. De waarde van de NTC wordt gemeten met een weerstandsmeter.
 
 \begin{figure}[ht!]
 \begin{subfigure}[c]{0.48\textwidth}
@@ -334,17 +339,15 @@ In dit document wordt gebruik gemaakt van de NTC \ntctype{} van
 \ntcman~\cite{betatherm10K3A542i}. Dit is een NTC met een meetbereik van
 \mathcelc{-40} tot \mathcelc{+118}. In figuur~\ref{fig:ntc_ntc_plot_celsius_fig} is
 de weerstand in Ohm uitgezet tegen de temperatuur in graden Celsius.
-%
+Het is goed te zien dat het verloop niet-lineair is. De gegevens
+zijn te vinden in tabel~\ref{tab:specsntc} op pagina~\pageref{tab:specsntc}.
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=\figscale]{gnuplot/ntc_ntc_plot_celsius_fig}
 \caption[Weerstand-temperatuur karakteristiek van de NTC]{Weerstand-temperatuur karakteristiek van de NTC (temperatuur in graden Celsius).}
 \label{fig:ntc_ntc_plot_celsius_fig}
 \end{figure}
-%
-Het is goed te zien dat het verloop niet-lineair is. De gegevens
-zijn te vinden in tabel~\ref{tab:specsntc} op pagina~\pageref{tab:specsntc}.
-
 
 Noot: in alle wiskundige vergelijkingen wordt de temperatuur in Kelvin
 gegeven tenzij anders is vermeld.
@@ -510,6 +513,7 @@ en parameters gevonden:
 \begin{tabular}{cc}
 parameter & Waarde \\ 
 \hline 
+    &                \\[-2.2ex]
 $a$ & \ntcshhkelvinA \\ 
 $b$ & \ntcshhkelvinB \\ 
 $c$ & \ntcshhkelvinC \\ 
@@ -621,6 +625,7 @@ de temperatuur in graden Celsius en in Kelvin.
 \begin{tabular}{ccc}
 parameter & bij $T$ in \mathcelc{\!\!} & bij $T$ in K \\
 \hline
+    &                  &                 \\[-2.2ex]
 $a$ & \ntcbetacelsiusA & \ntcbetakelvinA \\ 
 $b$ & \ntcbetacelsiusB & \ntcbetakelvinB \\ 
 $c$ & \ntcbetacelsiusC & \ntcbetakelvinC \\ 
@@ -1342,11 +1347,11 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 
 \clearpage
 \section{Listings van Gnuplot-scripts}
-\label{app:ntc_shh_kelvin}
-\lstinputlisting[caption=hallo,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
-\newpage
 \label{app:ntc_shh_straightline_beta}
 \lstinputlisting[caption=hallo,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
+\newpage
+\label{app:ntc_shh_kelvin}
+\lstinputlisting[caption=hallo,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
 \newpage
 \label{app:ntc_shh_straightline_adapt}
 \lstinputlisting[caption=hallo,label=cod:ntc_shh_straightline_adapt]{gnuplot/ntc_shh_straightline_adapt.plt}
