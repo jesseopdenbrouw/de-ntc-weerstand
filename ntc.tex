@@ -950,10 +950,11 @@ verder uit elkaar liggen.
 
 \subsection{De NTC in combinatie met een ADC}
 
-In figuur~\ref{fig:ntc_graph1} is goed te zien dat, als $\rntc$ tussen $R_K$ en
-$R_G$ blijft, de uitgangsspanning nooit onder $U_{O,min}$ komt. Dit spanningsgebied
-blijft onbenut. We gebruiken een aftrek-schakeling (instrumentatieversterker met in
-eerste instantie een versterking van 1x) om deze spanning er van af te trekken, zie
+In figuur~\ref{fig:ntc_graph1} is goed te zien dat, als $\rntc$ tussen $R_K$ en $R_G$
+blijft, de uitgangsspanning nooit onder $U_{O,min}$ komt. Dit spanningsgebied blijft
+onbenut. We gebruiken een aftrek-schakeling om deze spanning er van af te trekken. De
+aftrekschakeling wordt gerealiseerd met een instrumentatieversterker (met in eerste
+instantie een versterking van 1x) in combinatie met een \textsl{Wheatstone-brug}, zie
 figuur~\ref{fig:ntc_ampli}.
 
 \begin{figure}[ht!]
@@ -964,6 +965,12 @@ figuur~\ref{fig:ntc_ampli}.
 \end{figure}
 
 %In figuur 3 is een bekende schakeling uit de elektronica te zien:de Wheatstone-brug
+
+De overdracht is:
+
+\begin{equation}
+U_{IA} = \left( \dfrac{\ropt}{\rntc+\ropt} - \dfrac{R_B}{R_A+R_B} \right)\cdot U_B
+\end{equation}
 
 De spanning op de min-ingang van de instrumentatieversterker is de spanningsdeling
 van $R_A$ en $R_B$. Gebruikmakend van vergelijking~\eqref{equ:uominub} is de relatie
