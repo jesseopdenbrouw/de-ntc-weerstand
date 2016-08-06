@@ -160,7 +160,7 @@
     %pdfproducer={PDFtoLaTex}, % producer of the document
     pdfkeywords={ntc} % list of keywords
     pdfdisplaydoctitle=true,
-    pdfstartview=FitH,
+    %pdfstartview=FitH,
     %TODO uitzetten in definitieve versie?
     %pdfpagemode=UseNone
     %TODO aanzetten in definitieve versie?
@@ -301,7 +301,19 @@ NTC wordt gebruikt in analoge schakelingen om bijvoorbeeld iets te schakelen
 bij een bepaalde temperatuur, meestal in combinatie met een Schmitt-trigger.
 In digitale schakelingen wordt de temperatuur berekend met behulp van een
 analoog-digitaal converter (ADC) en software. Denk hierbij bijvoorbeeld aan
-een intelligente thermostaat. 
+een intelligente thermostaat.
+
+In dit hoofstuk introduceren we de NTC. We stippen kort de constructie aan
+en geven de informatie van de fabrikant weer. In hoofdstuk~\ref{sec:wiskundige}
+laten we diverse wiskundige beschrijvingen zien van de NTC. Deze beschrijvingen
+gebruiken we in hoofdstuk~\ref{sec:bepalenparameters}
+om de diverse parameters en co\"effici\"enten te bepalen met behulp van curve
+fitting technieken. In hoofdstuk~\ref{sec:bepalentemperatuur} is te zien hoe
+de temperatuur berekend kan worden als de waarde van de NTC bekend is.
+Hoofdstuk~\ref{sec:gebruik} behandelt het gebruik van de
+NTC in eenvoudige schakelingen.
+Om het geheel wat duidelijker te maken geven we in hoofdstuk~\ref{sec:voorbeeld}
+een voorbeeld.
 
 \subsection{Constructie en eigenschappen}
 Een NTC is een halfgeleider-weerstand en is erg gevoelig voor kleine variaties
@@ -351,9 +363,10 @@ zijn te vinden in tabel~\ref{tab:specsntc} op pagina~\pageref{tab:specsntc}.
 
 Noot: in alle wiskundige vergelijkingen wordt de temperatuur in Kelvin
 gegeven tenzij anders is vermeld.
+
 Enkele gegevens die door de fabrikant verstrekt zijn te vinden in
 tabel~\ref{tab:enigegegevens}.
-
+%
 \begin{table}[ht!]
 \centering
 \caption{Enige gegevens van de gebruikte NTC.}
@@ -369,7 +382,7 @@ Thermische tijdconstante in vloeistof van \mathcelc{+25} tot  \mathcelc{+75} & s
 Bedrijfstemperatuur & \mathcelc{} & $-40$ tot $+125$ \\
 \end{tabu}
 \end{table}
-
+%
 Twee belangrijke parameters zijn de Beta-waarde $B$ en de weerstandswaarde $R_0$ bij
 \mathcelc{+25}. Voor deze NTC zijn dat $B=3976$ en $R_0=10\text{ k}\Omega$. De
 parameters worden gebruikt bij de wiskundige beschrijvingen van de NTC.
@@ -378,7 +391,9 @@ Een derde belangrijke parameters is de dissipatie-constante $K$ en heeft te
 maken met zelfverwarming van de NTC. Een NTC is namelijk een weerstand en die
 dissipeert vermogen als er een stroom doorheen vloeit. Daardoor verwarmt de
 NTC zichzelf. Bij metingen moet hier rekening worden gehouden. Voor deze NTC
-is $K=2$ mW/\mathcelc{\!}.
+is $K=2$ mW/\mathcelc{\!}. Hoewel de fabrikant het niet vermeldt, geldt het
+hier in open lucht. In vloeistof of vaste stof (denk aan het monteren op een
+koellichaam) gelden andere waarden.
 
 In de regel zullen we de weerstandswaarde van de NTC bepalen door middel van
 een meting. Als de weerstandswaarde bekend is, kunnen we de temperatuur bepalen.
@@ -395,7 +410,7 @@ de weerstandswaarde van de NTC.
 
 \clearpage
 \section{Wiskundige beschrijvingen van de NTC}
-
+\label{sec:wiskundige}
 De relatie tussen de temperatuur $T$ en de weerstandswaarde $\rntc$ wordt zeer
 goed benaderd door de vergelijking van Steinhart-Hart~\cite{STEINHART1968497}:
 
@@ -477,18 +492,25 @@ R_\infty = R_0\cdot \text{e}^{-\frac{B}{T_0}}
 
 Merk op dat $R_\infty$ geen onafhankelijke variabele is.
 
+We beschouwen nog de aangepaste exponenti\"ele B-parameter-vergelijking
+\begin{equation}
+\label{equ:steinharthartexpadapt}
+\setlength\fboxsep{2ex}
+\boxed{\rntc = A\cdot\text{e}^{-\frac{B}{T}}}
+\end{equation}
+
+waarbij $A$ en $B$ onafhankelijke variabelen zijn.
 
 \clearpage
 \section{Bepalen van de co\"effici\"enten en parameters met curve fitting}
-De fabrikant geeft in het algemeen een tabel op met temperatuur en bijhorende
+\label{sec:bepalenparameters}
+De fabrikant geeft in het algemeen een tabel op met temperatuur en bijbehorende
 weerstandswaarden. Met behulp van \textsl{curve fitting} technieken is het
-mogelijk om voor de Steinhart-Hart vergelijking en de vereenvoudigde en 
-exponenti\"ele Steinhart-Hart vergelijking de juiste co\"effici\"enten te
-vinden. Uiteraard zoeken we naar functies die de gegevens van de NTC zo goed
-mogelijk benaderen. We bekijken ook nog de Beta-co\"effici\"ent nog nader
-en laten zien dat de vereenvoudigde en exponenti\"ele Steinhart-Hart
-vergelijkingen beter kunnen worden benaderd door de vergelijkingen iets te
-wijzigen.
+mogelijk om voor de Steinhart-Hart vergelijking en de B-parameter vergelijkingen
+de juiste co\"effici\"enten te vinden. Uiteraard zoeken we naar functies die de
+gegevens van de NTC zo goed mogelijk benaderen. We bekijken ook nog de
+Beta-co\"effici\"ent nader en laten zien dat de B-parameter vergelijkingen
+beter kunnen worden benaderd door de vergelijkingen iets te wijzigen.
 
 \subsection{De Steinhart-Hart vergelijking}
 In figuur~\ref{fig:ntc_ntc_plot_kelvin_fig} is de weerstand-temperatuur karakteristiek
@@ -653,8 +675,8 @@ R_\text{NTC} = R_\infty \cdot\text{e}^\frac{B}{T} \qquad \text{met} \qquad R_\in
 %%%\end{equation}
 
 Merk op dat $R_\infty$ geen onafhankelijke variabele is, maar afhankelijk is van $B$.
-We vervangen $R_\infty$ nu door een onafhankelijk variabele $A$ zodat de vergelijking
-overgaat in:
+We vervangen $R_\infty$ nu door de variabele $A$ zodat de vergelijking overgaat in:
+
 \begin{equation}
 \label{equ:betafuncexpAB}
 R_\text{NTC} = A \cdot\text{e}^\frac{B}{T}
@@ -714,8 +736,42 @@ De functie is:
 
 
 \clearpage
-\section{Gebruik van de NTC}
+\section{Bepalen van de temperatuur}
+\label{sec:bepalentemperatuur}
+De temperatuur is te bepalen door de weerstandswaarde van de NTC te meten of te
+berekenen.
+Met de Steinhart-Hart-vergelijking gaat dat als volgt:
 
+\begin{equation}
+\label{equ:invertedsteinharthart}
+\setlength\fboxsep{2ex}
+\boxed{T = \dfrac{1}{a + b\cdot\ln \rntc + c\cdot( \ln \rntc )^3}}
+\end{equation}
+Hierin zijn $a$, $b$ en $c$ bekende constanten.
+
+Met de B-parameter-vergelijking:
+\begin{equation}
+\label{equ:invertedsteinharthartsimpl}
+\setlength\fboxsep{2ex}
+%\boxed{T = \dfrac{1}{\dfrac{1}{T_0} + \dfrac{1}{B}\cdot \ln\left(\dfrac{\rntc}{R_0}\right)}}
+%\boxed{T = \dfrac{1}{\dfrac{1}{T_0} + \dfrac{1}{B}\cdot \left(\ln \rntc - \ln R_0\right)}}
+\boxed{T = \dfrac{B}{\ln \rntc - \ln R_0 + \dfrac{B}{T_0}}}
+\end{equation}
+Hierin zijn $B$, $R_0$ en $T_0$ bekende constanten.
+
+
+Met de aangepaste B-parameter-vergelijking:
+\begin{equation}
+\label{equ:invertedsteinharthartadapt}
+\setlength\fboxsep{2ex}
+\boxed{T = \dfrac{B}{\ln \rntc - \ln A}}
+\end{equation}
+Hierin zijn $A$ en $B$ bekende constanten, $\ln A$ is dus ook een constante.
+
+
+\clearpage
+\section{Gebruik van de NTC}
+\label{sec:gebruik}
 Het is meestal niet mogelijk om direct de weerstandswaarde te gebruiken maar
 wel een afgeleide spanning daarvan. Met behulp van een eenvoudige spanningsdeler
 is deze spanning te op te wekken. Bij gebruik in analoge systemen wordt de
@@ -752,15 +808,15 @@ We kunnen nu $\rntc$ expliciet maken:
 
 Door de uitgangsspanning $U_O$ te meten is $\rntc$ te berekenen.
 
-\subsection{Overdrachtskarakteristieken van de spanningsdeler}
+\subsection{Overdrachtskarakteristiek van de spanningsdeler}
 Voor de overdrachtskarakteristiek maken we gebruik van de aangepaste exponenti\"ele
-B-parameter vergelijking --- de weerstand bepalen met de Steinhart-Hart-vergelijking
+B-parameter vergelijking --- het gebruik van de Steinhart-Hart-vergelijking
 levert veel rekenwerk op.
 De overdrachtsfunctie van de spanningsdeler als functie van de temperatuur is:
 
 \begin{equation}
 \label{equ:transferh}
-H(T) = \dfrac{R_S}{\rntc + R_S}=\dfrac{R_S}{A\cdot\text{e}^{\,(B/T)}+R_S}
+H(T) = \dfrac{U_O}{U_B} = \dfrac{R_S}{\rntc + R_S}=\dfrac{R_S}{A\cdot\text{e}^{\,(B/T)}+R_S}
 \end{equation}
 
 De overdrachtsfunctie is te zien in figuur~\ref{fig:transferfunctionz}. De
@@ -775,17 +831,20 @@ de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
 \label{fig:transferfunctionz}
 \end{figure}
 
+\subsection{Bepalen van de temperatuur}
 Om de temperatuur te berekenen als functie van de overdracht werken we de
 vergelijking in~\eqref{equ:transferh} om:
 
 \begin{equation}
 \label{equ:transferT}
-T = \dfrac{B}{\ln (R_s - H\cdot R_S) - \ln (H\cdot A)}
+T = \dfrac{B}{\ln (R_s - H\cdot R_S) - \ln (H\cdot A)} \qquad\qquad\text{met }H = \dfrac{U_0}{U_B}
 \end{equation}
 
+Let erop dat $T$ in Kelvin wordt uigedrukt.
 In figuur~\ref{fig:transferfunctionT} is de karakteristiek te zien. Merk op
 dat $H$ niet 0 of 1 kan zijn, omdat de noemer van~\eqref{equ:transferT} dan
-onbepaald is.
+onbepaald is. Merk ook op dat de overdracht in het gebied $H=0,2$ tot $H=0,8$
+behoorlijk lineair is.
 
 \begin{figure}[ht!]
 \centering
@@ -795,9 +854,18 @@ de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
 \label{fig:transferfunctionT}
 \end{figure}
 
+\subsection{Vermogensdissipatie van de NTC}
+De NTC is een weerstand en dissipeert zodoende vermogen. Daar verwarmt de NTC
+zichzelf. Het gevolg daarvan is dat weerstandswaarde afwijkt.
 
+\begin{equation}
+P_{ntc} = I_{ntc}\cdot U_{ntc} = \dfrac{U_B}{\rntc+R_S}\cdot \dfrac{\rntc}{\rntc+R_S}\cdot U_B = \dfrac{\rntc}{(\rntc+R_S)^2}\cdot U_B^2
+\end{equation} 
 
-
+Het maximaal gedissipeerde vermogen wordt bereikt als $\rntc = R_S$:
+\begin{equation}
+P_{ntc,max} = \dfrac{R_S}{(R_S+R_S)^2}\cdot U_B^2 = \dfrac{1}{4R_S}\cdot U_B^2
+\end{equation}
 
 \subsection{De optimale waarde van de serieweerstand}
 We kunnen nu iets zeggen over de serieweerstand $R_S$. Als deze weerstandswaarde
@@ -816,7 +884,8 @@ mogelijke waarde) en $U_O$ minimaal bij $\rntc = R_G$ (de noemer heeft nu de
 grootst mogelijke waarde)
 
 We introduceren een nieuwe term: \textsl{spanningsswing}. De spanningsswing is
-het verschil tussen de maximale uitgangsspanning en de minimale uitgangsspanning.
+het verschil tussen de maximale uitgangsspanning en de minimale uitgangsspanning
+van de spanningsdeler.
 De \textsl{relatieve spanningsswing} is de verhouding van spanningsswing en de
 bronspanning. De formule is:
 
@@ -906,21 +975,6 @@ parameters en hoe zij zich tot elkaar verhouden.
 \label{fig:ntc_graph1}
 \end{figure}
 
-\subsection{Vermogensdissipatie van de NTC}
-De NTC is een weerstand en dissipeert zodoende vermogen. Daar verwarmt de NTC
-zichzelf. Het gevolg daarvan is dat weerstandswaarde afwijkt.
-
-\begin{equation}
-P_{ntc} = I_{ntc}\cdot U_{ntc} = \dfrac{U_B}{\rntc+R_S}\cdot \dfrac{\rntc}{\rntc+R_S}\cdot U_B^2 =
-\dfrac{\rntc}{(\rntc+R_S)^2}\cdot U_B^2
-\end{equation} 
-
-Het maximaal gedissipeerde vermogen wordt bereikt als $\rntc = R_S$:
-\begin{equation}
-P_{ntc,max} = \dfrac{R_S}{(R_S+R_S)^2}\cdot U_B^2 = \dfrac{1}{4R_S}\cdot U_B^2
-\end{equation}
-
-
 \subsection{Diverse Z-functies}
 In figuur~\ref{fig:spanningsswings} van diverse $Z$-functies gegeven. Hierbij is
 de algemene vorm:
@@ -932,7 +986,7 @@ met
 R_K = \dfrac{1}{n}\quad\text{en}\quad R_G = n \qquad\longrightarrow\qquad
 \ropt = \sqrt{\dfrac{1}{n}\cdot n} = 1
 \end{equation}
-voor $n$ = 2, 3, 4, 10. Het voordeel hiervan is dat $\ropt$ nu altijd 1 is
+voor $n$ = 2, 3, 4 en 10. Het voordeel hiervan is dat $\ropt$ nu altijd 1 is
 (\textsl{genormaliseerd}).
 
 \begin{figure}[ht!]
@@ -947,20 +1001,26 @@ dat alle functies dezelfde vorm hebben. Naar mate $n$ groter wordt, neemt de
 spanningsswing toe. Dit is logisch wat een grote $n$ betekent dat $R_K$ en $R_G$
 verder uit elkaar liggen.
 
-
-\subsection{De NTC in combinatie met een ADC}
-
+\subsection{Aanpassen van het meetbereik}
+De uitgangsspanning van de spanningsdeler is begrensd tussen $U_{O,min}$ en $U_{O,max}$
+en dat is over het algemeen niet het volledige bereik tussen de referentiespanning en
+de voedingsspanning.
 In figuur~\ref{fig:ntc_graph1} is goed te zien dat, als $\rntc$ tussen $R_K$ en $R_G$
 blijft, de uitgangsspanning nooit onder $U_{O,min}$ komt. Dit spanningsgebied blijft
-onbenut. We gebruiken een aftrek-schakeling om deze spanning er van af te trekken. De
+onbenut. We gebruiken een aftrekschakeling om deze spanning er van af te trekken. De
 aftrekschakeling wordt gerealiseerd met een instrumentatieversterker (met in eerste
 instantie een versterking van 1x) in combinatie met een \textsl{Wheatstone-brug}, zie
-figuur~\ref{fig:ntc_ampli}.
+figuur~\ref{fig:ntc_ampli}. Merk op dat de serieweerstand $R_S$ is vervangen door
+$\ropt$.
+
+De spanning op de plus-ingang van de instrumentatieversterker wordt gevormd door eerder
+gepresenteerde spanningsdeler in figuur~\ref{fig:ntc_voltagediv}.
+De min-ingang is verbonden met de spanningsdeler die wordt gevormd door $R_A$ en $R_B$.
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.63]{drawings/ntc_ampli}
-\caption{Schakeling om de NTC te gebruiken met een ADC.}
+\caption{Schakeling voor het aanpassen van het meetbereik.}
 \label{fig:ntc_ampli}
 \end{figure}
 
@@ -972,8 +1032,7 @@ De overdracht is:
 U_{IA} = \left( \dfrac{\ropt}{\rntc+\ropt} - \dfrac{R_B}{R_A+R_B} \right)\cdot U_B
 \end{equation}
 
-De spanning op de min-ingang van de instrumentatieversterker is de spanningsdeling
-van $R_A$ en $R_B$. Gebruikmakend van vergelijking~\eqref{equ:uominub} is de relatie
+Gebruikmakend van vergelijking~\eqref{equ:uominub} is de relatie
 tussen $R_A$ en $R_B$ als volgt:
 
 \begin{equation}
@@ -981,86 +1040,75 @@ tussen $R_A$ en $R_B$ als volgt:
 \end{equation}
 
 Dat is dezelfde verhouding als een spanningsdeling met $\rntc = R_G$ en
-$R_S = \ropt$.
-De maximale uitgangsspanning van de instrumentatieversterker is nu:
+$R_S = \ropt$. De uitgangsspanning van de instrumentatieversterker is nu:
 
 \begin{equation}
-U_{IA,max} = \left( \dfrac{\ropt}{R_K+\ropt} - \dfrac{R_B}{R_A+R_B}\right)\cdot U_B =
-\left(\dfrac{1-\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\right)\cdot U_B = U_{SWING}
+U_{IA} = \left( \dfrac{\ropt}{\rntc+\ropt} - \dfrac{R_B}{R_A+R_B}\right)\cdot U_B 
 \end{equation}
 
-Menig microcontroller bevat een ADC die ingansspanningen van 0V tot en met de
-voedingsspanning kan omzetten in een binaire waarde. De uitgangsspanning $U_{IA}$
-is in de regel niet gelijk aan deze maximale ingangsspanning van de ADC. We moeten
-nog een versterker toevoegen voor optimale aanpassing aan de ADC. Dit kan met
-de instrumentatieversterker:
+%De uitgangsspanning van de instrumentatie versterking is maximaal bij $\rntc = R_K$.
+Deze uitgangsspanning is in de regel niet gelijk aan de bronspanning. We passen
+daarom versterking toe. Dit kan met de instrumentatieversterker:
 
 \begin{equation}
-U_{ADC,max} = A_{IA}\cdot U_{IA,max} = A_{IA}\cdot \left(\dfrac{1-\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\right)\cdot U_B
+U_{IA,amp} =  A_{IA}\cdot\left( \dfrac{\ropt}{\rntc+\ropt} - \dfrac{R_B}{R_A+R_B}\right)\cdot U_B 
 \end{equation}
 
-Hierin is $U_{ADC,max}$ de maximaal aan te bieden spanning aan de ADC en $A_{IA}$ de
-versterking van de instrumentatieversterker. Deze versterking
-kan berekend worden met:
+Hierin is $A_{IA}$ de versterking van de instrumentatieversterker. We zoeken nu
+de waarde van $A_{IA}$ waarbij $U_{IA,amp}$ maximaal is. Dan geldt namelijk dat
+$U_{IA,amp}=U_B$.
+De uitgangsspanning van de instrumentatieversterker is maximaal bij $\rntc = R_K$.
+Verder geldt dat $R_B = \sqrt{\epsilon}\cdot R_A$
+zodat:
 
 \begin{equation}
-A_{IA} = \left(\dfrac{1+\sqrt{\epsilon}}{1-\sqrt{\epsilon}}\right)\cdot
-\left( \dfrac{U_{ADC,max}}{U_B}\right)
+\begin{split}
+U_{IA,max,ampl} &= A_{IA}\cdot\left( \dfrac{\ropt}{R_K+\ropt} - \dfrac{R_B}{R_A+R_B}\right)\cdot U_B \\
+&= A_{IA}\cdot\left(\dfrac{U_{O,max}}{U_B}-\dfrac{U_{O,min}}{U_B}\right)\cdot U_B \\
+&= A_{IA}\cdot \left(\dfrac{1-\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\right)\cdot U_B
+\end{split}
 \end{equation}
 
-Aangezien geldt dat $U_{ADC,max} = U_B$ wordt de vergelijking:
-%equ:resspanswing
+%%%Menig microcontroller bevat een ADC die ingansspanningen van 0V tot en met de
+%%%voedingsspanning kan omzetten in een binaire waarde. De uitgangsspanning $U_{IA}$
+%%%is in de regel niet gelijk aan deze maximale ingangsspanning van de ADC. We moeten
+%%%nog een versterker toevoegen voor optimale aanpassing aan de ADC. Dit kan met
+%%%de instrumentatieversterker:
+%%%
+%%%\begin{equation}
+%%%U_{IA,max,ampl} = A_{IA}\cdot U_{IA,max} = A_{IA}\cdot \left(\dfrac{1-\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\right)\cdot U_B
+%%%\end{equation}
+
+%%%Hierin is $U_{ADC,max}$ de maximaal aan te bieden spanning aan de ADC en $A_{IA}$ de
+%%%versterking van de instrumentatieversterker. Deze versterking
+%%%kan berekend worden met:
+
+Om $U_{IA,max,ampl}$ gelijk aan $U_B$ te krijgen moet gelden dat:
+
+%%%%\begin{equation}
+%%%%A_{IA} = \left(\dfrac{1+\sqrt{\epsilon}}{1-\sqrt{\epsilon}}\right)\cdot
+%%%%\left( \dfrac{U_{ADC,max}}{U_B}\right)
+%%%%\end{equation}
+%%%%
+%%%%Aangezien geldt dat $U_{ADC,max} = U_B$ wordt de vergelijking:
+%%%%%equ:resspanswing
 
 \begin{equation}
 A_{IA} = \left(\dfrac{1+\sqrt{\epsilon}}{1-\sqrt{\epsilon}}\right)% = \dfrac{1}{Z}
 \end{equation}
 
-
 We vervangen de instrumentatieversterker in figuur~\ref{fig:ntc_ampli} met
 \'e\'en die een versterking heeft van $A_{IA}$.
 
-Opmerking: indien $A_{IA} < 1$ dan moet de instrumentatieversterker eigenlijk
-verzwakken, m.a.w. de spanningsswing is al groter dan het spanningsbereik van
-de ADC. We kunnen nu eenvoudig $A_{IA}$ op 1 krijgen door de bronspanning te
-verlagen.
+Opmerking: praktisch gezien moet de versterking iets kleiner zijn dat $A_{IA}$
+omdat de uitgang van de instrumentatie versterker niet tegen de voedingsspanningen
+mag vastlopen. Zogenaamde \textsl{rail-to-real} versterkers komen tot een tiental
+millivolt van de voedingsspanningen.
 
-Opmerking: indien de $A_{IA}$ tussen 1 en 2 ligt, kunnen we er ook voor kiezen
-om niet te versterken; dat scheelt componenten en is wat betreft resolutie nog
-acceptabel.
-
-
-
-\clearpage
-\section{Bepalen van de temperatuur}
-De temperatuur is te bepalen door de weerstandswaarde van de NTC te meten of te
-berekenen.
-Met de Steinhart-Hart-vergelijking gaat dat als volgt:
-
-\begin{equation}
-\label{equ:invertedsteinharthart}
-\setlength\fboxsep{2ex}
-\boxed{T = \dfrac{1}{a + b\cdot\ln \rntc + c\cdot( \ln \rntc )^3}}
-\end{equation}
-Hierin zijn $a$, $b$ en $c$ bekende constanten.
-
-Met de B-parameter-vergelijking:
-\begin{equation}
-\label{equ:invertedsteinharthartsimpl}
-\setlength\fboxsep{2ex}
-%\boxed{T = \dfrac{1}{\dfrac{1}{T_0} + \dfrac{1}{B}\cdot \ln\left(\dfrac{\rntc}{R_0}\right)}}
-%\boxed{T = \dfrac{1}{\dfrac{1}{T_0} + \dfrac{1}{B}\cdot \left(\ln \rntc - \ln R_0\right)}}
-\boxed{T = \dfrac{B}{\ln \rntc - \ln R_0 + \dfrac{B}{T_0}}}
-\end{equation}
-Hierin zijn $B$, $R_0$ en $T_0$ bekende constanten.
-
-
-Met de aangepaste B-parameter-vergelijking:
-\begin{equation}
-\label{equ:invertedsteinharthartadapt}
-\setlength\fboxsep{2ex}
-\boxed{T = \dfrac{B}{\ln \rntc - \ln A}}
-\end{equation}
-Hierin zijn $A$ en $B$ bekende constanten, $\ln A$ is dus ook een constante.
+%%% %%%
+%%%Opmerking: indien de $A_{IA}$ tussen 1 en 2 ligt, kunnen we er ook voor kiezen
+%%%om niet te versterken; dat scheelt componenten en is wat betreft resolutie nog
+%%%acceptabel.
 
 
 
@@ -1069,10 +1117,12 @@ Hierin zijn $A$ en $B$ bekende constanten, $\ln A$ is dus ook een constante.
 \label{sec:voorbeeld}
 We willen de temperatuur meten tussen \mathcelc{0} en \mathcelc{30}. We gaan in
 eerste instantie uit van de spanningsdeler in figuur~\ref{fig:ntc_voltagediv}.
-We nemen als bronspanning $U_B=5$ V. In
-tabel~\ref{tab:specsntc} zoeken we de bijbehorende weerstandswaarde de de NTC
-kan aannemen: $R_G=32.650\ \Omega$ bij \mathcelc{0} en $R_K= 8.056\ \Omega$
-(afgerond) bij \mathcelc{30}. We kunnen nu de optimale serieweerstand uitrekenen:
+We nemen als bronspanning $U_B=5$ V. In tabel~\ref{tab:specsntc} zoeken we de
+bijbehorende weerstandswaarde de de NTC kan aannemen: $R_G=32.650\ \Omega$ bij
+\mathcelc{0} en $R_K= 8.056\ \Omega$ (afgerond) bij \mathcelc{30}. Van de NTC
+is gegeven dat $B=\ntcshhstraightlineBonedec$ K en $A=\ntcshhstraightlineA\ \Omega$.
+
+ We kunnen nu de optimale serieweerstand uitrekenen:
 
 \begin{equation}
 \ropt = \sqrt{R_K\cdot R_G} = \sqrt{8056\cdot32650} = 16218\ \Omega
@@ -1137,11 +1187,11 @@ P_{ntc,max} = \dfrac{1}{4\cdot \ropt}\cdot U_B^2 = \dfrac{1}{4\cdot 16218}\cdot 
 0,000385374\ \text{W}
 \end{equation}
 
-Dat is ongeveer 0,4 mW. De maximale temperatuurstijging $T_{self}$ als gevolg van de
+Dat is ongeveer 0,4 mW. De maximale temperatuurstijging $T_{self,max}$ als gevolg van de
  zelfverwarming is:
  
 \begin{equation}
-T_{self} = \dfrac{P_{ntc.max}}{K} = \dfrac{0,4\cdot10^{-3}}{2\cdot10^{-3}}=0,2\ ^\circ\text{C}
+T_{self,max} = \dfrac{P_{ntc.max}}{K} = \dfrac{0,4\cdot10^{-3}}{2\cdot10^{-3}}=0,2\ ^\circ\text{C}
 \end{equation}
 
 %%%
