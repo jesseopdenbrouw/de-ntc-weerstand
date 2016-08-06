@@ -17,8 +17,8 @@ fit mean(x) 'GegevensBetatherm10K3A542I.dat' using 3:4 via m
 SST = FIT_WSSR/(FIT_NDF+1)
 
 # Do a fit using a power function:
-lnA = 0.1
-B = 0.1
+#lnA = 0.1
+#B = 5000.0
 straightline(x) = B*x + lnA
 fit straightline(x) "GegevensBetatherm10K3A542I.dat" using 3:4 via B, lnA
 
@@ -44,5 +44,6 @@ print sprintf("\\newcommand{\\ntcshhstraightlineB}{%f}", B)
 print sprintf("\\newcommand{\\ntcshhstraightlineBonedec}{%.1f}", B)
 print sprintf("\\newcommand{\\ntcshhstraightlineBint}{%d}", B)
 print sprintf("\\newcommand{\\ntcshhstraightlineRsqr}{%f}", R2)
+print sprintf("\\newcommand{\\ntcshhstraightlineRnull}{%f}", exp(lnA+B/298.15))
 
 set output
