@@ -33,22 +33,31 @@ Ropt = 16218.0
 H_diff(x) = (Ropt*A*B*exp(B/x))/((A*exp(B/x)+Ropt)**2*(x*x))
 
 # Do the plot
-set xrange [233:391]
+#set xrange [233:391]
+set xrange [100:500]
 set xlabel "T [K]" # offset 0,-1
 set ylabel "diff H [K^-^1]" # offset -1
-plot H_diff(x) title "" lc "blue" with lines #, "GegevensBetatherm10K3A542I.dat" using 3:4 with points pt 7 ps 0.2 lc "red" title "" 
+plot H_diff(x) title "" lc "red" with lines
+
+maxdiff = 0;
+maxtemp = 0;
+do for [t=10000:50000] {
+	diff = H_diff(t/100.0)
+	if (diff > maxdiff) {
+		maxdiff = diff
+		maxtemp = t/100.0
+	}
+}
+
+set print "-"
+print maxtemp
+print maxdiff
 
 # Create LaTeX file with parameters
 set decimalsign locale
-#set print "ntc_sensitivity_H_alpha.tex"
-#print "% Curve fitting parameters for fitting straight line"
-#print "% ln Rntc = B*x + A"
-#print sprintf("\\newcommand{\\ntcsensitivityntcalphaabs}{%f}", ntc_diff(298.15))
-#print sprintf("\\newcommand{\\ntcsensitivityntcalpha}{%f}", ntc_diff(298.15)/100.0)
-#print sprintf("\\newcommand{\\ntcsensitivityntcalphatwodec}{%.2f}", ntc_diff(298.15)/100.0)
-#print sprintf("\\newcommand{\\ntcshhstraightlineB}{%f}", B)
-#print sprintf("\\newcommand{\\ntcshhstraightlineBonedec}{%.1f}", B)
-#print sprintf("\\newcommand{\\ntcshhstraightlineBint}{%d}", B)
-#print sprintf("\\newcommand{\\ntcshhstraightlineRsqr}{%f}", R2)
+set print "ntc_sensitivity_H.tex"
+print "% H fitting parameters maximum devirate"
+print sprintf("\\newcommand{\\ntcsensitivityhmaxdiff}{%f}", maxdiff)
+print sprintf("\\newcommand{\\ntcsensitivityhmaxtemp}{%.2f}", maxtemp)
 
 set output
