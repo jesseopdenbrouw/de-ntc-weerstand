@@ -810,14 +810,25 @@ Door de uitgangsspanning $U_O$ te meten is $\rntc$ te berekenen.
 
 \subsection{Overdrachtskarakteristiek van de spanningsdeler}
 Voor de overdrachtskarakteristiek maken we gebruik van de aangepaste exponenti\"ele
-B-parameter vergelijking --- het gebruik van de Steinhart-Hart-vergelijking
+B-parameter vergelijking, het gebruik van de Steinhart-Hart-vergelijking
 levert veel rekenwerk op.
 De overdrachtsfunctie van de spanningsdeler als functie van de temperatuur is:
 
 \begin{equation}
 \label{equ:transferh}
-H(T) = \dfrac{U_O}{U_B} = \dfrac{R_S}{\rntc + R_S}=\dfrac{R_S}{A\cdot\text{e}^{\,(B/T)}+R_S}
+H = \dfrac{U_O}{U_B} = \dfrac{R_S}{\rntc + R_S}=\dfrac{R_S}{A\cdot\text{e}^{\,(B/T)}+R_S}
 \end{equation}
+
+Twee uitersten worden nu eerst onderzocht. Als de temperatuur erg laag wordt en
+richting 0 K gaat, zal de overdracht naar 0 toe gaan, immers de exponent van de
+e-macht wordt dan zeer groot. Als de temperatuur heel groot wordt, richting 
+neindig, dan wordt de exponent van de e-macht zeer klein en is de bijdrage van de
+NTC ook zeer klein; de overdracht gaat naar 1 toe.
+
+Verder onderzoek wijst uit dat de overdrachtsfunctie nooit negatief omdat alle
+weerstandswaarden positief zijn. De functie zal dus van 0 naar 1 toelopen voor
+oplopende temperatuur. Gezien de e-macht zal het ook geen rechte lijn zijn, maar
+een mooie kromme.
 
 De overdrachtsfunctie is te zien in figuur~\ref{fig:transferfunctionz}. De
 gebruikte waarden zijn: $R_S = 16218\ \Omega$, $B = 3892,2$ K en
@@ -825,11 +836,16 @@ $A = 0,020637035\ \Omega$. Zie  ook hoofdstuk~\ref{sec:voorbeeld}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=1]{gnuplot/transferfunctionz}
+\includegraphics[scale=1]{gnuplot/transferfunctionH}
 \caption[Overdracht van de spanningsdeler als functie van de temperatuur]{Overdracht van de spanningsdeler als functie van de temperatuur. Noot:
 de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
 \label{fig:transferfunctionz}
 \end{figure}
+
+Duidelijk is te zien dat $H$ van 0 naar 1 gaat bij oplopende temperatuur.
+Wat verder opvalt is dat rond $T = 280$ K de functie zeer snel stijgt. Anders
+gezegd: op dat punt geldt dat bij een kleine temperatuursverandering de verandering
+van H groot is.
 
 \subsection{Bepalen van de temperatuur}
 Om de temperatuur te berekenen als functie van de overdracht werken we de
@@ -837,14 +853,21 @@ vergelijking in~\eqref{equ:transferh} om:
 
 \begin{equation}
 \label{equ:transferT}
-T = \dfrac{B}{\ln (R_s - H\cdot R_S) - \ln (H\cdot A)} \qquad\qquad\text{met }H = \dfrac{U_0}{U_B}
+\begin{split}
+%T &= \dfrac{B}{\ln (R_s - H\cdot R_S) - \ln (H\cdot A)}\qquad\qquad\qquad\text{met }H = \dfrac{U_0}{U_B} \\
+%  &= \dfrac{B}{\ln\left(\dfrac{R_S-H\cdot R_S}{H\cdot A}\right)}\\
+%  &= \dfrac{B}{\ln\left(\dfrac{(1-H)\cdot R_S}{H\cdot A}\right)} \\
+T  &= \dfrac{B}{\ln\left(\dfrac{1-H}{H}\right)+\ln\left(\dfrac{R_S}{A}\right)}\qquad\qquad\qquad\text{met }H = \dfrac{U_0}{U_B}
+\end{split}
 \end{equation}
 
+In bovenstaande vergelijking is de term $\ln\,(R_S/A)$ een constante.
 Let erop dat $T$ in Kelvin wordt uigedrukt.
 In figuur~\ref{fig:transferfunctionT} is de karakteristiek te zien. Merk op
 dat $H$ niet 0 of 1 kan zijn, omdat de noemer van~\eqref{equ:transferT} dan
 onbepaald is. Merk ook op dat de overdracht in het gebied $H=0,2$ tot $H=0,8$
 behoorlijk lineair is.
+
 
 \begin{figure}[ht!]
 \centering
@@ -1101,7 +1124,7 @@ We vervangen de instrumentatieversterker in figuur~\ref{fig:ntc_ampli} met
 \'e\'en die een versterking heeft van $A_{IA}$.
 
 Opmerking: praktisch gezien moet de versterking iets kleiner zijn dat $A_{IA}$
-omdat de uitgang van de instrumentatie versterker niet tegen de voedingsspanningen
+omdat de uitgang van de instrumentatieversterker niet tegen de voedingsspanningen
 mag vastlopen. Zogenaamde \textsl{rail-to-real} versterkers komen tot een tiental
 millivolt van de voedingsspanningen.
 
@@ -1109,6 +1132,40 @@ millivolt van de voedingsspanningen.
 %%%Opmerking: indien de $A_{IA}$ tussen 1 en 2 ligt, kunnen we er ook voor kiezen
 %%%om niet te versterken; dat scheelt componenten en is wat betreft resolutie nog
 %%%acceptabel.
+
+
+\clearpage
+\section{De ADC}
+Bij gebruik van digitale systemen wordt de 
+
+De ADC 
+
+In figuur~\ref{fig:ntc_voltagediv_adc} is de eenvoudige spanningsdeler met de ADC
+te zien.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.63]{drawings/ntc_voltagediv_adc}
+\caption[Eenvoudige spanningsdeler met ADC]{Eenvoudige spanningsdeler met ADC.}
+\label{fig:ntc_voltagediv_adc}
+\end{figure}
+
+Aangezien de ADC lineair is en de referentiespanning weergeeft met het getal $G_{adc,0} =0$  en
+de voedingsspanning met de maximale waarde $G_{adc,max}$ kunnen we het volgende stellen:
+
+\begin{equation}
+H = \dfrac{U_O}{U_B} = \dfrac{G_{adc}}{G_{adc,max}}
+\end{equation}
+
+De overdracht, uitgedrukt in waarden van de ADC is dan:
+\begin{equation}
+\label{equ:transferTadc}
+\begin{split}
+T &= \dfrac{B}{\ln\left(\dfrac{1-H}{H}\right)+\ln\left(\dfrac{R_S}{A}\right)} \\
+  &= \dfrac{B}{\ln\left(\dfrac{1-\dfrac{G_{adc}}{G_{adc,max}}}{\dfrac{G_{adc}}{G_{adc,max}}}\right)+\ln\left(\dfrac{R_S}{A}\right)} \\
+  &= \dfrac{B}{\ln\left(\dfrac{G_{adc,max}-G_{adc}}{G_{adc}}\right)+\ln\left(\dfrac{R_S}{A}\right)}
+\end{split}
+\end{equation}
 
 
 
