@@ -375,7 +375,7 @@ tabel~\ref{tab:enigegegevens}.
 \textbf{Parameter} & \textbf{Eenheid} & \textbf{Waarde} \\[0.1ex]
 Weerstand bij \mathcelc{+25}                   & $\Omega$             & $10.000$ \\
 Toleratie van \mathcelc{0} tot \mathcelc{+70} & \mathcelc{\!\!}     & $0,2$ \\
-Alpha bij \mathcelc{+25}                       & \%/\mathcelc{\!} & $-4,39$ \\
+Alpha-waarde bij \mathcelc{+25}                       & \%/\mathcelc{\!} & $-4,39$ \\
 Beta-waarde 25/85                             & K               & 3976 \\
 Dissipatie-constante                          & mW/\mathcelc{\!}  & $2,0$ (ong.) \\
 Thermische tijdconstante in vloeistof van \mathcelc{+25} tot  \mathcelc{+75} & s & $< 1,3$ \\[0.8ex]
@@ -405,6 +405,25 @@ de weerstandswaarde van de NTC.
 \includegraphics[scale=1]{gnuplot/ntc_ntc_plot_celsius_fig_inv}
 \caption{Temperatuur-weerstand karakteristiek van de NTC.}
 \label{fig:ntc_ntc_plot_celsius_fig_inv}
+\end{figure}
+
+De \textsl{gevoeligheid} van de NTC is de weerstandsverandering rond een bepaalde
+temperatuur. Duidelijk is dat de gevoeligheid bij lage temperaturen heel groot is
+en bij  hoge temperaturen erg klein. De fabrikant geeft de weerstandsverandering
+bij een temperatuur van $\mathcelc{+25}$ aan met de Alpha-waarde, meestal in
+procenten per graad Celsius. Voor deze NTC is dat~$-4,39$~\%/\mathcelc{\!}. Merk
+op dat het een negatief getal is omdat de weerstandswaarde afneemt bij toenemende
+temperatuur. Uitgaande van een $R_0 = 10.000\ \Omega$ is dat~%
+\mbox{$-439\ \Omega/\mathcelc{\!}$}.
+
+In figuur~\ref{fig:ntc_sensitivity_ntc} is de gevoeligheid van de NTC te zien.
+De gevoeligheid is uitgedrukt in $\Omega$/K.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=1]{gnuplot/ntc_sensitivity_ntc}
+\caption{Gevoeligheid van de NTC.}
+\label{fig:ntc_sensitivity_ntc}
 \end{figure}
 
 
@@ -465,7 +484,7 @@ gedefini\"eerd op $25\:^\circ\text{C}$ $(298,15\: \text{K})$. Voor de gebruikte 
 is $R_0 = 10\text{ k}\Omega$.
 %%%Merk op dat de term $\ln\rntc - \ln R_0$ dimensieloos is, deze kan namelijk ook als
 %%%$\ln(\rntc / R_0$) worden geschreven.
-De $B$ wordt de beta-parameter genoemd en  moet door metingen bepaald worden.
+De $B$ wordt de beta-co\"effici\"ent genoemd en  moet door metingen bepaald worden.
 
 We kunnen $\rntc$ expliciet schrijven zodat de exponenti\"ele B-parameter-vergelijking
 als volgt wordt:
@@ -530,7 +549,7 @@ en parameters gevonden:
 \input{gnuplot/ntc_shh_kelvin_curve_fitting_params}
 \begin{table}[ht!]
 \centering
-\caption{Co\"effici\"enten vbij temperatuur in Kelvin.}
+\caption{Co\"effici\"enten bij temperatuur in Kelvin.}
 \label{tab:ntc_shh_kelvin_curve_fitting_params}
 \begin{tabular}{cc}
 parameter & Waarde \\ 
@@ -808,16 +827,31 @@ We kunnen nu $\rntc$ expliciet maken:
 
 Door de uitgangsspanning $U_O$ te meten is $\rntc$ te berekenen.
 
+\subsection{Vermogensdissipatie van de NTC}
+De NTC is een weerstand en dissipeert zodoende vermogen. Daar verwarmt de NTC
+zichzelf. Het gevolg daarvan is dat weerstandswaarde afwijkt.
+
+\begin{equation}
+P_{ntc} = I_{ntc}\cdot U_{ntc} = \dfrac{U_B}{\rntc+R_S}\cdot \dfrac{\rntc}{\rntc+R_S}\cdot U_B = \dfrac{\rntc}{(\rntc+R_S)^2}\cdot U_B^2
+\end{equation} 
+
+Het maximaal gedissipeerde vermogen wordt bereikt als $\rntc = R_S$:
+\begin{equation}
+P_{ntc,max} = \dfrac{R_S}{(R_S+R_S)^2}\cdot U_B^2 = \dfrac{1}{4R_S}\cdot U_B^2
+\end{equation}
+
 \subsection{Overdrachtskarakteristiek van de spanningsdeler}
 Voor de overdrachtskarakteristiek maken we gebruik van de aangepaste exponenti\"ele
 B-parameter vergelijking, het gebruik van de Steinhart-Hart-vergelijking
 levert veel rekenwerk op.
-De overdrachtsfunctie van de spanningsdeler als functie van de temperatuur is:
+De overdracht $H$ van de spanningsdeler als functie van de temperatuur~is:
 
 \begin{equation}
 \label{equ:transferh}
 H = \dfrac{U_O}{U_B} = \dfrac{R_S}{\rntc + R_S}=\dfrac{R_S}{A\cdot\text{e}^{\,(B/T)}+R_S}
 \end{equation}
+
+Merk op dat $H$ de dimensie V/V (volt per volt) heeft en is dus dimensieloos.
 
 Twee uitersten worden nu eerst onderzocht. Als de temperatuur erg laag wordt en
 richting 0 K gaat, zal de overdracht naar 0 toe gaan, immers de exponent van de
@@ -877,18 +911,54 @@ de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
 \label{fig:transferfunctionT}
 \end{figure}
 
-\subsection{Vermogensdissipatie van de NTC}
-De NTC is een weerstand en dissipeert zodoende vermogen. Daar verwarmt de NTC
-zichzelf. Het gevolg daarvan is dat weerstandswaarde afwijkt.
+\subsection{Gevoeligheid van de spanningsdeler en de temperatuur}
+De definitie van gevoeligheid is de verandering van $H$ ($\Delta H$) bij verandering van $T$ ($\Delta T$). Als $\Delta T$ dan naar 0  gaat, wordt het een limietovergang en dat is de eerste afgeleide van $H$ naar $T$:
 
 \begin{equation}
-P_{ntc} = I_{ntc}\cdot U_{ntc} = \dfrac{U_B}{\rntc+R_S}\cdot \dfrac{\rntc}{\rntc+R_S}\cdot U_B = \dfrac{\rntc}{(\rntc+R_S)^2}\cdot U_B^2
-\end{equation} 
-
-Het maximaal gedissipeerde vermogen wordt bereikt als $\rntc = R_S$:
-\begin{equation}
-P_{ntc,max} = \dfrac{R_S}{(R_S+R_S)^2}\cdot U_B^2 = \dfrac{1}{4R_S}\cdot U_B^2
+S_H = \lim_{\Delta T \to 0} \dfrac{\Delta H}{\Delta T} = \dfrac{\text{d}H}{\text{d}T}
 \end{equation}
+
+De gevoeligheid is dus de eerste afgeleide van $H$ naar $T$:
+
+\begin{equation}
+S_H = \dfrac{\text{d}H}{\text{d}T} = 
+\dfrac{R_S\cdot A\cdot B\cdot\text{e}^\frac{B}{T}}{\left(A\cdot\text{e}^\frac{B}{T}+R_S\right)^2\cdot T^2} 
+\end{equation}
+
+In figuur~\ref{fig:ntc_sensitivity_H} is de gevoeligheid te zien.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=1]{gnuplot/ntc_sensitivity_H}
+\caption[Grafiek van de gevoeligheid als functie van de temperatuur]{Grafiek van de gevoeligheid als functie van de temperatuur. Noot:
+de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
+\label{fig:ntc_sensitivity_H}
+\end{figure}
+
+\input{gnuplot/ntc_sensitivity_H}
+De gevoeligheid is maximaal bij \ntcsensitivityhmaxtemp\ K en bedraagt
+\ntcsensitivityhmaxdiff\ K$^{-1}$ (de overdracht $H$ is dimensieloos).
+
+Om de gevoeligheid van de temperatuur te bepalen moeten we de eerste afgeleide
+berekenen van~\eqref{equ:transferT}. Dat is behoorlijke lastige functie:
+
+\begin{equation}
+S_T = -\dfrac{B}{  H\cdot(-1+H)\cdot \ln\left(-\dfrac{ (-1+H)\cdot R_S }{H\cdot A}  \right)^2 }
+\end{equation}
+
+In figuur~\ref{fig:ntc_sensitivity_T} is de gevoeligheid van de temperatuur als functie van de
+overdracht te zien. Merk op dat de gevoeligheid redelijk constant is tussen $H=0,2$ en $H=0,8$
+en bedraagt zo'n 100 K (de overdracht $H$ is dimensieloos).
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=1]{gnuplot/ntc_sensitivity_T}
+\caption[Grafiek van de gevoeligheid als functie van de overdracht]{Grafiek van de gevoeligheid als functie van de overdracht. Noot:
+de NTC heeft een werkgebied van 233,15 K tot 391,15 K.}
+\label{fig:ntc_sensitivity_T}
+\end{figure}
+
+
 
 \subsection{De optimale waarde van de serieweerstand}
 We kunnen nu iets zeggen over de serieweerstand $R_S$. Als deze weerstandswaarde
