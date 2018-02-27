@@ -36,7 +36,7 @@ H_diff(x) = (Ropt*A*B*exp(B/x))/((A*exp(B/x)+Ropt)**2*(x*x))
 #set xrange [233:391]
 set xrange [100:500]
 set xlabel "T [K]" # offset 0,-1
-set ylabel "diff H [-]" # offset -1
+set ylabel "diff H [K^-^1]" # offset -1
 plot H_diff(x) title "" lc "red" with lines
 
 maxdiff = 0;
