@@ -2,7 +2,7 @@
 %% NTC
 %% University of Applied Sciences, Electrical Engineering.
 %%
-%% (c)2015, J. op den Brouw <J.E.J.opdenBrouw@hhs.nl>
+%% (c)2018, J. op den Brouw <J.E.J.opdenBrouw@hhs.nl>
 %% v0.1
 %%
 %% This document is created for the benefit of the students who
@@ -369,7 +369,7 @@ tabel~\ref{tab:enigegegevens}.
 %
 \begin{table}[ht!]
 \centering
-\caption{Enige gegevens van de gebruikte NTC.}
+\caption{Enige gegevens van de gebruikte NTC van Betatherm.}
 \label{tab:enigegegevens}
 \begin{tabu} to 0.9\textwidth {X[,l,2]X[,c,1]X[,c,1]}
 \textbf{Parameter} & \textbf{Eenheid} & \textbf{Waarde} \\[0.1ex]
@@ -393,7 +393,10 @@ dissipeert vermogen als er een stroom doorheen vloeit. Daardoor verwarmt de
 NTC zichzelf. Bij metingen moet hier rekening worden gehouden. Voor deze NTC
 is $K=2$ mW/\mathcelc{\!}. Hoewel de fabrikant het niet vermeldt, geldt het
 hier in open lucht. In vloeistof of vaste stof (denk aan het monteren op een
-koellichaam) gelden andere waarden.
+koellichaam) gelden andere waarden. Het verrekenen van de temperatuurstijging
+als gevolg van zelfverwarming mag alleen bij een steady-state-omgeving en na
+een langere tijd, dus als de omgevingstemperatuur voor langere tijd constant
+blijft.
 
 In de regel zullen we de weerstandswaarde van de NTC bepalen door middel van
 een meting. Als de weerstandswaarde bekend is, kunnen we de temperatuur bepalen.
@@ -484,7 +487,7 @@ gedefini\"eerd op $25\:^\circ\text{C}$ $(298,15\: \text{K})$. Voor de gebruikte 
 is $R_0 = 10\text{ k}\Omega$.
 %%%Merk op dat de term $\ln\rntc - \ln R_0$ dimensieloos is, deze kan namelijk ook als
 %%%$\ln(\rntc / R_0$) worden geschreven.
-De $B$ wordt de beta-co\"effici\"ent genoemd en  moet door metingen bepaald worden.
+De $B$ wordt de Beta-co\"effici\"ent genoemd en  moet door metingen bepaald worden.
 
 We kunnen $\rntc$ expliciet schrijven zodat de exponenti\"ele B-parameter-vergelijking
 als volgt wordt:
@@ -549,7 +552,7 @@ en parameters gevonden:
 \input{gnuplot/ntc_shh_kelvin_curve_fitting_params}
 \begin{table}[ht!]
 \centering
-\caption{Co\"effici\"enten bij temperatuur in Kelvin.}
+\caption{Steinhart-Hart-co\"effici\"enten bij temperatuur in Kelvin.}
 \label{tab:ntc_shh_kelvin_curve_fitting_params}
 \begin{tabular}{cc}
 parameter & Waarde \\ 
@@ -629,7 +632,7 @@ Meestal geeft de fabrikant een Beta-co\"effici\"ent bij een temperatuur van
 \mathcelc{25} of een gemiddelde Beta tussen \mathcelc{25} en \mathcelc{85}.
 Bij de gebruikte NTC is de $B_{25/85} =$ \betamantwofiveeightfive, een $B_{25}$
 is niet gegeven. We kunnen voor elk paar van weerstandswaarde-temperatuur de
-beta uitrekenen. Uit formule~\eqref{equ:steinharthartsimpl} wordt $B$ expliciet
+Beta uitrekenen. Uit formule~\eqref{equ:steinharthartsimpl} wordt $B$ expliciet
 gemaakt:
 
 \begin{equation}
@@ -736,7 +739,7 @@ Deze functie benadert de gegevens van de NTC dus beter.
 \input{gnuplot/ntc_shh_straightline_adapt_curve_fitting_params}
 \begin{table}[ht!]
 \centering
-\caption{Co\"effici\"enten van de functie voor $B$ bij temperatuur in graden Celsius en Kelvin.}
+\caption{Co\"effici\"enten van de functie voor $B$ en $A$ bij temperatuur in Kelvin.}
 \label{tab:ntc_shh_straightline_adapt_curve_fitting_params}
 \begin{tabular}{c|c}
 parameter & Waarde \\ 
@@ -862,7 +865,7 @@ NTC ook zeer klein; de overdracht gaat naar 1 toe.
 Verder onderzoek wijst uit dat de overdrachtsfunctie nooit negatief omdat alle
 weerstandswaarden positief zijn. De functie zal dus van 0 naar 1 toelopen voor
 oplopende temperatuur. Gezien de e-macht zal het ook geen rechte lijn zijn, maar
-een mooie kromme.
+een vloeiende kromme.
 
 De overdrachtsfunctie is te zien in figuur~\ref{fig:transferfunctionz}. De
 gebruikte waarden zijn: $R_S = 16218\ \Omega$, $B = 3892,2$ K en
@@ -1258,7 +1261,7 @@ is gegeven dat $B=\ntcshhstraightlineBonedec$ K en $A=\ntcshhstraightlineA\ \Ome
 De verhouding $\epsilon$ is: 
 
 \begin{equation}
-\epsilon = \sqrt{\dfrac{R_K}{R_G}} = \dfrac{8056}{32650} = 0,2467
+\epsilon = \dfrac{R_K}{R_G} = \dfrac{8056}{32650} = 0,2467 \qquad \longrightarrow \qquad \sqrt{\epsilon} = 0,4967
 \end{equation}
 
 De minimale en maximale spanningen zijn:
@@ -1271,7 +1274,7 @@ U_{O,min} = \dfrac{\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\cdot U_B
 \begin{equation}
 U_{O,max} = \dfrac{1}{1+\sqrt{\epsilon}}\cdot U_B
           = \dfrac{1}{1+0,4967}\cdot 5 = 0,6681\cdot 5
-          = 3,3090\ \text{V}
+          = 3,3405\ \text{V}
 \end{equation}
 
 De spanningsswing is:
@@ -1282,7 +1285,14 @@ U_{SWING} = \dfrac{1-\sqrt{\epsilon}}{1+\sqrt{\epsilon}}\cdot U_B
           = 1,6810\ \text{V}
 \end{equation}
 
-Stel dat $U_0 = 2,1$ V. Dan is
+De versterking $A_{IA}$ van de instrumentatieversterker is:
+
+\begin{equation}
+A_{IA} = \dfrac{1+\sqrt{\epsilon}}{1-\sqrt{\epsilon}} = 
+         \dfrac{1+0,4967}{1-0,4967} = 2,9738
+\end{equation}
+
+Stel nu dat $U_0 = 2,1$ V. Dan is
 
 \begin{equation}
 \rntc = \dfrac{U_B-U_0}{U_0}\cdot R_S = \dfrac{5,0-2,1}{2,1}\cdot 16218 = 22396\ \Omega
@@ -1291,36 +1301,46 @@ Stel dat $U_0 = 2,1$ V. Dan is
 We berekenen de temperatuur met behulp van de aangepaste B-parameter vergelijking:
 
 \begin{equation}
-T = \dfrac{B}{\ln \rntc - \ln A} = \dfrac{3892,2}{10,0167+3,8807} = 280,17
+T = \dfrac{B}{\ln \rntc - \ln A} = \dfrac{3892,2}{10,0167+3,8807} = 280,17\ \text{K}
 \end{equation}
 
 Dit is de temperatuur in Kelvin, omrekenen naar graden Celcius:
 
 \begin{equation}
-T_{Celcius} = T - 273,15 = 280,17 - 273,15 = 6,92\ ^\circ\text{C}
+T_{Celcius} = T - 273,15 = 280,17 - 273,15 = 7,02\ ^\circ\text{C}
 \end{equation}
 
-De versterking $A_{IA}$ van de instrumentatieversterker is:
+Berekening van de temperatuur met de Steinhart-Hart-vergelijking geeft een temperatuur
+van 280,71 K. Omrekenen naar Celsius levert 7,56 $^\circ\text{C}$.
+
+De vermogensdissipatie is
 
 \begin{equation}
-A_{IA} = \dfrac{1+\sqrt{\epsilon}}{1-\sqrt{\epsilon}} = 
-         \dfrac{1+0,4967}{1-0,4967} = 2,9738
-\end{equation}
+P_{ntc} = \dfrac{\rntc}{(\rntc+R_S)^2}\cdot U_B^2 = \dfrac{22396}{(22396+16218)^2}\cdot 5^2
+        = 0,0003755094\ \text{W}
+\end{equation} 
 
-De maximale vermogensdissipatie is
-
-\begin{equation}
-P_{ntc,max} = \dfrac{1}{4\cdot \ropt}\cdot U_B^2 = \dfrac{1}{4\cdot 16218}\cdot 5^2 =
-0,000385374\ \text{W}
-\end{equation}
-
-Dat is ongeveer 0,4 mW. De maximale temperatuurstijging $T_{self,max}$ als gevolg van de
- zelfverwarming is:
+De temperatuurstijging $T_{self}$ als gevolg van de
+zelfverwarming is:
  
 \begin{equation}
-T_{self,max} = \dfrac{P_{ntc.max}}{K} = \dfrac{0,4\cdot10^{-3}}{2\cdot10^{-3}}=0,2\ ^\circ\text{C}
+T_{self} = \dfrac{P_{ntc}}{K} = \dfrac{0,37551\cdot10^{-3}}{2\cdot10^{-3}}=0,188\ ^\circ\text{C}
 \end{equation}
 
+Deze stijging geldt alleen maar bij een constante temperatuur en na een langere tijd.
+
+%%%\begin{equation}
+%%%P_{ntc,max} = \dfrac{1}{4\cdot \ropt}\cdot U_B^2 = \dfrac{1}{4\cdot 16218}\cdot 5^2 =
+%%%0,000385374\ \text{W}
+%%%\end{equation}
+%%%
+%%%Dat is ongeveer 0,4 mW. De maximale temperatuurstijging $T_{self,max}$ als gevolg van de
+%%% zelfverwarming is:
+%%% 
+%%%\begin{equation}
+%%%T_{self,max} = \dfrac{P_{ntc.max}}{K} = \dfrac{0,4\cdot10^{-3}}{2\cdot10^{-3}}=0,2\ ^\circ\text{C}
+%%%\end{equation}
+%%%
 %%%
 %%%\newpage
 %%%\begin{equation}
@@ -1532,13 +1552,13 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 \clearpage
 \section{Listings van Gnuplot-scripts}
 \label{app:ntc_shh_straightline_beta}
-\lstinputlisting[caption=hallo,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
+\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Beta.,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
 \newpage
 \label{app:ntc_shh_kelvin}
-\lstinputlisting[caption=hallo,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
+\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Steinhart-Hart-co\"efficienten.,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
 \newpage
 \label{app:ntc_shh_straightline_adapt}
-\lstinputlisting[caption=hallo,label=cod:ntc_shh_straightline_adapt]{gnuplot/ntc_shh_straightline_adapt.plt}
+\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Beta en A.,label=cod:ntc_shh_straightline_adapt]{gnuplot/ntc_shh_straightline_adapt.plt}
 
 
 \clearpage
