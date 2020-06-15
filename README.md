@@ -2,7 +2,7 @@
 
 Dit is een Readme voor de repository NTC
 
-### What is this repository for? ###
+### Deze repository ###
 
 Dit document behandelt van de NTC-weerstand:
 
@@ -17,7 +17,8 @@ Dit document behandelt van de NTC-weerstand:
 
 Als basis dient de \LaTeX-code. Figuren zijn in PDF, PNG of JPG opgezet.
 Schema's en tekeningen zijn in PPT getekend en omgezet naar PDF.
-Met behulp van Inkscape zijn de PDF's gecropt.
+Met behulp van Inkscape zijn de PDF's gecropt. Voor het berekenen van
+diverse parameters en het plotten van grafieken is Gnuplot gebruikt.
 
 ### Niet aanpassen ###
 
