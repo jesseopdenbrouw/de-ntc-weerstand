@@ -22,7 +22,7 @@
 %% Use the Latin Modern font...
 %% https://www.ctan.org/tex-archive/fonts/lm
 %%\usepackage{lmodern}
-\usepackage{charter}
+%%\usepackage{charter}
 \usepackage[bitstream-charter]{mathdesign}
 
 %https://www.ctan.org/pkg/inputenc
@@ -73,7 +73,7 @@
 
 %% Default monospaced font from inconsolata, e.g. for listings
 %% http://ctan.cs.uu.nl/fonts/inconsolata/doc/inconsolata-doc.pdf
-\usepackage[scaled=0.90]{inconsolata}
+\usepackage[scaled=0.90]{nimbusmono}
 
 %% http://ctan.cs.uu.nl/macros/latex/contrib/biblatex/doc/biblatex.pdf
 %% neem paginanummer niet samen in de backref lijst dus 1,2,3 i.p.v. 1-3 (anders kun je niet op 2 klikken)
@@ -111,8 +111,8 @@
 
 
 %% Making captions nicer...
-\usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=sl,up]{caption}
-\DeclareCaptionLabelSeparator{emdash}{\ \ ---\ \ }
+\usepackage[font=footnotesize,format=plain,labelfont=bf,textfont=sl]{caption}
+%\DeclareCaptionLabelSeparator{emdash}{\ \ ---\ \ }
 %\usepackage[font=footnotesize,format=plain,labelfont=bf,up,textfont=it,up]{subcaption}
 \usepackage[labelformat=simple,font=footnotesize,format=plain,labelfont=bf,textfont=sl]{subcaption}
 %\captionsetup[table]{justification=raggedright,singlelinecheck=off,skip=3pt}
@@ -143,10 +143,6 @@
 % ruimte tussen footnotes:
 \setlength{\footnotesep}{.8\baselineskip}
 
-%% Making captions nicer...
-%% http://ctan.cs.uu.nl/macros/latex/contrib/caption/caption-eng.pdf
-%\usepackage[font=footnotesize,format=plain,labelfont=bf,textfont=sl]{caption}
-
 %% Using hyperrefs...
 %% http://ctan.cs.uu.nl/macros/latex/contrib/hyperref/hyperref.pdf
 \usepackage{hyperref}
@@ -156,17 +152,9 @@
     pdftitle={NTC},    % title
     pdfauthor={J.E.J. op den Brouw},     % author
     pdfsubject={NTC},   % subject of the document
-    %pdfcreator={Latex},   % creator of the document
-    %pdfproducer={PDFtoLaTex}, % producer of the document
     pdfkeywords={ntc} % list of keywords
     pdfdisplaydoctitle=true,
-    %pdfstartview=FitH,
-    %TODO uitzetten in definitieve versie?
-    %pdfpagemode=UseNone
-    %TODO aanzetten in definitieve versie?
     pdfpagelayout=TwoPageRight,
-%    plainpages=false,
-%    pdfpagelabels=true
 }
 
 %% Use computer code listings
@@ -267,6 +255,8 @@
 %% Ahhhh... At last, the beginning of the document...
 \begin{document}
 \raggedbottom
+\setlength{\abovedisplayskip}{0cm}
+\setlength{\belowdisplayskip}{2ex}
 
 %% Make title page
 \maketitle
@@ -515,6 +505,7 @@ R_\infty = R_0\cdot \text{e}^{-\frac{B}{T_0}}
 Merk op dat $R_\infty$ geen onafhankelijke variabele is.
 
 We beschouwen nog de aangepaste exponenti\"ele B-parameter-vergelijking
+
 \begin{equation}
 \label{equ:steinharthartexpadapt}
 \setlength\fboxsep{2ex}
@@ -598,7 +589,7 @@ bij de uiteinden van het lijnstuk, dus bij hoge en lage temperaturen.
 \label{fig:ntc_shh_straightline_beta_fig}
 \end{figure}
 
-Met behulp van het Gnuplot-script in lising~\ref{cod:ntc_shh_straightline_beta}
+Met behulp van het Gnuplot-script in listing~\ref{cod:ntc_shh_straightline_beta}
 zijn $B$ en $R^2$ bepaald.
 In tabel~\ref{tab:ntc_shh_straightline_beta_curve_fitting_params} zijn de waarden
 te vinden. $R^2$ ligt dicht tegen 1 aan, de gegevens worden dus goed benaderd door
@@ -752,6 +743,7 @@ $R^2$ & \ntcshhstraightlineRsqr \\
 \end{table}
 
 De functie is:
+
 \begin{equation}
 \rntc = \ntcshhstraightlineA\cdot\text{e}^\frac{\ntcshhstraightlineBonedec}{T}
 \end{equation}
@@ -772,6 +764,7 @@ Met de Steinhart-Hart-vergelijking gaat dat als volgt:
 Hierin zijn $a$, $b$ en $c$ bekende constanten.
 
 Met de B-parameter-vergelijking:
+
 \begin{equation}
 \label{equ:invertedsteinharthartsimpl}
 \setlength\fboxsep{2ex}
@@ -779,15 +772,18 @@ Met de B-parameter-vergelijking:
 %\boxed{T = \dfrac{1}{\dfrac{1}{T_0} + \dfrac{1}{B}\cdot \left(\ln \rntc - \ln R_0\right)}}
 \boxed{T = \dfrac{B}{\ln \rntc - \ln R_0 + \dfrac{B}{T_0}}}
 \end{equation}
+
 Hierin zijn $B$, $R_0$ en $T_0$ bekende constanten.
 
 
 Met de aangepaste B-parameter-vergelijking:
+
 \begin{equation}
 \label{equ:invertedsteinharthartadapt}
 \setlength\fboxsep{2ex}
 \boxed{T = \dfrac{B}{\ln \rntc - \ln A}}
 \end{equation}
+
 Hierin zijn $A$ en $B$ bekende constanten, $\ln A$ is dus ook een constante.
 
 
@@ -839,6 +835,7 @@ P_{ntc} = I_{ntc}\cdot U_{ntc} = \dfrac{U_B}{\rntc+R_S}\cdot \dfrac{\rntc}{\rntc
 \end{equation} 
 
 Het maximaal gedissipeerde vermogen wordt bereikt als $\rntc = R_S$:
+
 \begin{equation}
 P_{ntc,max} = \dfrac{R_S}{(R_S+R_S)^2}\cdot U_B^2 = \dfrac{1}{4R_S}\cdot U_B^2
 \end{equation}
@@ -859,7 +856,7 @@ Merk op dat $H$ de dimensie V/V (volt per volt) heeft en is dus dimensieloos.
 Twee uitersten worden nu eerst onderzocht. Als de temperatuur erg laag wordt en
 richting 0 K gaat, zal de overdracht naar 0 toe gaan, immers de exponent van de
 e-macht wordt dan zeer groot. Als de temperatuur heel groot wordt, richting 
-neindig, dan wordt de exponent van de e-macht zeer klein en is de bijdrage van de
+oneindig, dan wordt de exponent van de e-macht zeer klein en is de bijdrage van de
 NTC ook zeer klein; de overdracht gaat naar 1 toe.
 
 Verder onderzoek wijst uit dat de overdrachtsfunctie nooit negatief omdat alle
@@ -894,7 +891,7 @@ vergelijking in~\eqref{equ:transferh} om:
 %T &= \dfrac{B}{\ln (R_s - H\cdot R_S) - \ln (H\cdot A)}\qquad\qquad\qquad\text{met }H = \dfrac{U_0}{U_B} \\
 %  &= \dfrac{B}{\ln\left(\dfrac{R_S-H\cdot R_S}{H\cdot A}\right)}\\
 %  &= \dfrac{B}{\ln\left(\dfrac{(1-H)\cdot R_S}{H\cdot A}\right)} \\
-T  &= \dfrac{B}{\ln\left(\dfrac{1-H}{H}\right)+\ln\left(\dfrac{R_S}{A}\right)}\qquad\qquad\qquad\text{met }H = \dfrac{U_0}{U_B}
+T  &= \dfrac{B}{\ln\left(\dfrac{1-H}{H}\right)+\ln\left(\dfrac{R_S}{A}\right)}\qquad\qquad\qquad\text{met }H = \dfrac{U_0}{U_B} \text{ en } 0<H<1
 \end{split}
 \end{equation}
 
@@ -1074,6 +1071,7 @@ parameters en hoe zij zich tot elkaar verhouden.
 \subsection{Diverse Z-functies}
 In figuur~\ref{fig:spanningsswings} van diverse $Z$-functies gegeven. Hierbij is
 de algemene vorm:
+
 \begin{equation}
 Z(R_S) = \dfrac{R_S}{\dfrac{1}{n}+R_S} - \dfrac{R_S}{n+R_S}
 \end{equation}
@@ -1198,7 +1196,7 @@ We vervangen de instrumentatieversterker in figuur~\ref{fig:ntc_ampli} met
 
 Opmerking: praktisch gezien moet de versterking iets kleiner zijn dat $A_{IA}$
 omdat de uitgang van de instrumentatieversterker niet tegen de voedingsspanningen
-mag vastlopen. Zogenaamde \textsl{rail-to-real} versterkers komen tot een tiental
+mag vastlopen. Zogenoemde \textsl{rail-to-real} versterkers komen tot een tiental
 millivolt van de voedingsspanningen.
 
 %%% %%%
@@ -1378,7 +1376,7 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\frac{\rntc}{R_0}$ & $B$\tnote{a} \\[0.3ex]
 \hline \\[-2.0ex]
 \endhead
-\hline \multicolumn{7}{r}{\small\sl{vervolg op de volgende pagina}}
+\hline \multicolumn{7}{r}{\footnotesize\sl{vervolg op de volgende pagina}}
 \endfoot
 \hline
 \endlastfoot
@@ -1551,14 +1549,26 @@ $T\ [^\circ$C] & $\rntc$ & $1/T$ [K$^{-1}$]     & $\ln \rntc$ & $T$ [K] & $\ln\f
 
 \clearpage
 \section{Listings van Gnuplot-scripts}
-\label{app:ntc_shh_straightline_beta}
-\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Beta.,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
-\newpage
+
 \label{app:ntc_shh_kelvin}
 \lstinputlisting[caption=Gnuplot-script voor het bepalen van de Steinhart-Hart-co\"efficienten.,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
 \newpage
+\label{app:ntc_shh_straightline_beta}
+\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Beta.,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
+\newpage
 \label{app:ntc_shh_straightline_adapt}
 \lstinputlisting[caption=Gnuplot-script voor het bepalen van de Beta en A.,label=cod:ntc_shh_straightline_adapt]{gnuplot/ntc_shh_straightline_adapt.plt}
+
+
+
+
+%%%\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Beta.,label=cod:ntc_shh_straightline_beta]{gnuplot/ntc_shh_straightline_beta.plt}
+%%%\newpage
+%%%\label{app:ntc_shh_kelvin}
+%%%\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Steinhart-Hart-co\"efficienten.,label=cod:ntc_shh_kelvin]{gnuplot/ntc_shh_kelvin.plt}
+%%%\newpage
+%%%\label{app:ntc_shh_straightline_adapt}
+%%%\lstinputlisting[caption=Gnuplot-script voor het bepalen van de Beta en A.,label=cod:ntc_shh_straightline_adapt]{gnuplot/ntc_shh_straightline_adapt.plt}
 
 
 \clearpage
@@ -1582,7 +1592,7 @@ Z(R_S) &= \dfrac{R_S\cdot(R_G+R_S)-R_S\cdot(R_K+R_S)}{(R_K+R_S)\cdotw(R_G+R_S)} 
 We maken gebruik van de quoti\"entregel:
 
 \begin{equation}
-f = \dfrac{g}{h} \quad \rightarrow \quad f' = \dfrac{f'g-fg'}{g^2}
+Z = \dfrac{f}{g} \quad \rightarrow \quad Z' = \dfrac{f'g-fg'}{g^2}
 \end{equation}
 
 Dus:
@@ -1598,6 +1608,7 @@ Dus:
 \end{split}
 \end{equation}
 met
+
 \begin{equation}
 N = \left((R_K+R_S)\cdotw(R_G+R_S)\right)^2
 \end{equation}
